@@ -1,0 +1,213 @@
+/* --- ベース設定 --- */
+:root {
+    --bg-color: #111111;
+    --text-main: #EEEEEE;
+    --text-sub: #888888;
+    --accent: #FFFFFF;
+    --font-en: 'Inter', sans-serif;
+    --font-jp: 'Noto Sans JP', sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    font-family: var(--font-en);
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+}
+
+a { text-decoration: none; color: inherit; }
+li { list-style: none; }
+
+/* --- アニメーション用クラス --- */
+.fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 1s ease forwards;
+}
+.delay { animation-delay: 0.3s; }
+.delay-long { animation-delay: 1.5s; }
+
+@keyframes fadeInUp {
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- Hero Section (動画背景) --- */
+.hero {
+    position: relative;
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.video-container {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    z-index: -1;
+}
+
+.video-container video {
+    width: 100%; height: 100%;
+    object-fit: cover;
+}
+
+.overlay {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.4); /* 動画を少し暗くする */
+}
+
+.hero-content {
+    text-align: center;
+    z-index: 1;
+}
+
+.hero-content h1 {
+    font-size: 4rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    margin-bottom: 10px;
+}
+
+.hero-content p {
+    font-size: 1.2rem;
+    color: var(--text-sub);
+    letter-spacing: 0.05em;
+}
+
+/* スクロールインジケーター */
+.scroll-indicator {
+    position: absolute;
+    bottom: 120px; /* ナビより上 */
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.8rem;
+    opacity: 0.7;
+}
+.scroll-indicator .line {
+    width: 1px; height: 50px;
+    background: var(--accent);
+}
+
+/* --- Section 共通 --- */
+.section {
+    padding: 100px 20px;
+}
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+.section-title {
+    font-size: 2rem;
+    margin-bottom: 40px;
+    border-bottom: 1px solid #333;
+    padding-bottom: 20px;
+}
+
+/* --- Works (Bento Grid) --- */
+.bento-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-auto-rows: 300px;
+    gap: 20px;
+}
+
+.card {
+    background-color: #222;
+    border-radius: 12px;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+/* グリッドのサイズ調整（PC表示時） */
+@media (min-width: 768px) {
+    .bento-grid {
+        grid-template-columns: repeat(3, 1fr); /* 3列 */
+    }
+    .card.large {
+        grid-column: span 2;
+        grid-row: span 2;
+    }
+    .card.wide {
+        grid-column: span 2;
+    }
+}
+
+/* ホバーエフェクト */
+.card:hover {
+    transform: scale(1.02);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+    z-index: 2;
+}
+
+.card-content {
+    position: absolute;
+    bottom: 0; left: 0; width: 100%;
+    padding: 20px;
+    background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+    transform: translateY(20px);
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+.card:hover .card-content {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.card-content h3 { font-size: 1.2rem; color: #fff; }
+.card-content p { font-size: 0.9rem; color: #ccc; }
+
+/* --- Floating Nav --- */
+.floating-nav {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(30, 30, 30, 0.8);
+    backdrop-filter: blur(10px);
+    padding: 15px 40px;
+    border-radius: 50px;
+    border: 1px solid rgba(255,255,255,0.1);
+    z-index: 100;
+}
+
+.floating-nav ul {
+    display: flex;
+    gap: 30px;
+}
+
+.floating-nav a {
+    font-weight: 700;
+    font-size: 0.9rem;
+    letter-spacing: 0.05em;
+    transition: color 0.3s;
+}
+
+.floating-nav a:hover {
+    color: var(--text-sub);
+}
+
+/* --- スマホ対応 --- */
+@media (max-width: 768px) {
+    .hero-content h1 { font-size: 2.5rem; }
+    .bento-grid { grid-template-columns: 1fr; } /* スマホは1列 */
+    .card.large, .card.wide { grid-column: auto; grid-row: auto; }
+}

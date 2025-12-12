@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marina Kawaguchi | Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div id="loader"></div>
+
+    <header class="hero">
+        <div class="video-container">
+            <video autoplay muted loop playsinline poster="assets/poster.jpg">
+                <source src="assets/demo-video.mp4" type="video/mp4">
+            </video>
+            <div class="overlay"></div>
+        </div>
+        <div class="hero-content">
+            <h1 class="fade-in">MARINA KAWAGUCHI</h1>
+            <p class="fade-in delay">Visual Creator / CG / Web / Movie</p>
+        </div>
+        <div class="scroll-indicator fade-in delay-long">
+            <span>SCROLL</span>
+            <div class="line"></div>
+        </div>
+    </header>
+
+    <section id="works" class="section">
+        <div class="container">
+            <h2 class="section-title">SELECTED WORKS</h2>
+            
+            <div class="bento-grid">
+                <article class="card large" style="background-image: url('https://placehold.co/800x800/222/fff?text=Main+Work');">
+                    <div class="card-content">
+                        <h3>VRChat Avatar "Moe"</h3>
+                        <p>3D Modeling / Unity</p>
+                    </div>
+                </article>
+
+                <article class="card wide" style="background-image: url('https://placehold.co/800x400/333/fff?text=Video+Work');">
+                    <div class="card-content">
+                        <h3>Brand Movie "AeroStride"</h3>
+                        <p>Motion Graphics / AfterEffects</p>
+                    </div>
+                </article>
+
+                <article class="card" style="background-image: url('https://placehold.co/400x400/444/fff?text=Web+App');">
+                    <div class="card-content">
+                        <h3>Gmail Reply Tool</h3>
+                        <p>Google Apps Script / UI Design</p>
+                    </div>
+                </article>
+
+                <article class="card" style="background-image: url('https://placehold.co/400x400/555/fff?text=MR+App');">
+                    <div class="card-content">
+                        <h3>Vision Pro App</h3>
+                        <p>Swift / RealityKit</p>
+                    </div>
+                </article>
+            </div>
+            
+            <div class="more-btn-container">
+                <a href="#" class="btn-arrow">View All Works -></a>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="section">
+        <div class="container">
+            <div class="about-wrapper">
+                <div class="about-text">
+                    <h2>Immersive Creator.</h2>
+                    <p>デジタルとリアルの境界を溶かす、没入感のある体験を作っています。<br>
+                    CG制作からWeb実装、MR開発まで、技術とデザインの両軸でアプローチします。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <nav class="floating-nav">
+        <ul>
+            <li><a href="#works">Works</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="mailto:contact@marinakawaguchi.com">Contact</a></li>
+        </ul>
+    </nav>
+
+    <script src="script.js"></script>
+</body>
+</html>
