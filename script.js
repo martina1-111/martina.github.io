@@ -13,6 +13,24 @@ document.addEventListener("DOMContentLoaded", () => {
 
     document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
 
+    document.querySelectorAll(".video-embed").forEach(container => {
+        const videoId = container.dataset.videoId;
+        const title = container.dataset.title || "YouTube video";
+        if (videoId && !videoId.startsWith("VIDEO_ID")) {
+            const iframe = document.createElement("iframe");
+            iframe.src = `https://www.youtube.com/embed/${videoId}?rel=0`;
+            iframe.title = title;
+            iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
+            iframe.allowFullscreen = true;
+            container.appendChild(iframe);
+        } else {
+            const placeholder = document.createElement("div");
+            placeholder.className = "placeholder";
+            placeholder.textContent = container.dataset.caption || "YouTubeリンクをここに設定してください。";
+            container.appendChild(placeholder);
+        }
+    });
+
     document.querySelectorAll('a[href^="#"]').forEach(link => {
         link.addEventListener("click", event => {
             const targetId = link.getAttribute("href");
