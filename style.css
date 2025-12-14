@@ -350,6 +350,35 @@ ul { list-style: none; }
     gap: 18px;
 }
 
+.works-tabs {
+    margin: 24px 0 12px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.tab {
+    display: inline-flex;
+    align-items: center;
+    padding: 10px 14px;
+    border-radius: 999px;
+    border: 1.5px solid #111;
+    background: #fff;
+    font-weight: 600;
+    color: var(--text-main);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.tab:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0 #111;
+}
+
+.tab.active {
+    background: #111;
+    color: #f5f5f3;
+}
+
 .project-card {
     position: relative;
     padding: 20px;
