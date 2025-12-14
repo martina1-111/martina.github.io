@@ -558,19 +558,8 @@ ul { list-style: none; }
 .dual-timeline {
     position: relative;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: 1fr 110px 1fr;
     gap: 16px;
-}
-
-.dual-timeline::before {
-    content: "";
-    position: absolute;
-    top: 10px;
-    bottom: 10px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 3px;
-    background: #c7a7d9;
 }
 
 .timeline-column {
@@ -622,6 +611,43 @@ ul { list-style: none; }
     font-weight: 700;
     margin-top: 6px;
     color: var(--text-main);
+}
+
+.timeline-axis {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 34px;
+    padding: 10px 0;
+}
+
+.timeline-axis::before {
+    content: "";
+    position: absolute;
+    top: 10px;
+    bottom: 10px;
+    width: 3px;
+    background: #c7a7d9;
+}
+
+.axis-year {
+    position: relative;
+    padding: 6px 10px;
+    background: #f5f5f3;
+    border: 1.5px solid #111;
+    border-radius: 12px;
+    font-weight: 700;
+    z-index: 1;
+}
+
+@media (max-width: 900px) {
+    .dual-timeline {
+        grid-template-columns: 1fr;
+    }
+    .timeline-axis {
+        display: none;
+    }
 }
 
 .contact-panel {
