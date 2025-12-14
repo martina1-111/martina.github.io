@@ -551,26 +551,41 @@ ul { list-style: none; }
     gap: 16px;
 }
 
-.entry {
-    padding: 6px 0;
+.entry-card {
+    display: block;
+    background: #fff;
+    border: 1.5px solid #111;
+    border-radius: 12px;
+    padding: 12px 14px;
+    box-shadow: 6px 6px 0 #111;
+    color: inherit;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.entry .period {
+.entry-card:hover {
+    transform: translate(-3px, -3px);
+    box-shadow: 10px 10px 0 #111;
+}
+
+.entry-card .period {
     font-weight: 700;
     color: var(--text-main);
 }
 
-.entry .role {
+.entry-card .role {
     margin: 4px 0;
     font-family: var(--font-jp);
 }
 
-.entry .desc {
+.entry-card .desc,
+.entry-card .meta {
     color: var(--text-sub);
     font-family: var(--font-jp);
+    font-size: 0.95rem;
+    margin-top: 2px;
 }
 
-.entry.placeholder {
+.entry-card.placeholder {
     min-height: 10px;
 }
 
