@@ -433,80 +433,64 @@ ul { list-style: none; }
     margin-top: auto;
 }
 
-.about-grid {
+.profile-compact {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 20px;
-}
-
-.about-copy {
-    background: #fff;
-    border: 1.5px solid #111;
-    border-radius: 14px;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    font-family: var(--font-jp);
-    box-shadow: 8px 8px 0 #111;
-}
-
-.profile-header {
-    display: grid;
-    grid-template-columns: 180px 1fr;
-    gap: 20px;
+    grid-template-columns: 110px 1fr;
+    gap: 14px;
     align-items: center;
-    margin-bottom: 24px;
+    margin-bottom: 12px;
 }
 
-.profile-header img {
-    width: 180px;
-    height: 180px;
+.profile-compact img {
+    width: 110px;
+    height: 110px;
     object-fit: cover;
-    border-radius: 16px;
-    border: 2px solid #111;
+    border-radius: 12px;
+    border: 1.5px solid #111;
 }
 
-.profile-text h2 {
-    margin-bottom: 10px;
-    font-size: clamp(1.6rem, 2.4vw, 2rem);
+.profile-main h2 {
+    margin-bottom: 6px;
+    font-size: clamp(1.4rem, 2.2vw, 1.8rem);
 }
 
-.profile-text p {
+.profile-main p {
     font-family: var(--font-jp);
-    color: var(--text-sub);
-    line-height: 1.7;
+    color: var(--text-main);
+    line-height: 1.5;
+    margin-bottom: 8px;
 }
 
 .resume {
     display: grid;
-    gap: 12px;
+    gap: 10px;
 }
 
 .resume-card {
     background: #fff;
-    border: 1.8px solid #111;
-    border-radius: 18px;
-    padding: 22px;
+    border: 1.5px solid #111;
+    border-radius: 14px;
+    padding: 12px 14px;
 }
 
 .resume-title {
     font-weight: 700;
-    margin-bottom: 12px;
+    margin-bottom: 8px;
 }
 
 .resume-card ul {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 6px;
 }
 
 .resume-card li {
     display: flex;
     justify-content: space-between;
-    gap: 10px;
+    gap: 8px;
     color: var(--text-sub);
     font-family: var(--font-jp);
+    font-size: 0.95rem;
 }
 
 .embed-grid {
