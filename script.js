@@ -12,6 +12,10 @@ document.addEventListener("DOMContentLoaded", () => {
     );
 
     document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
+    // フォールバック: もしIntersectionObserverが発火しなくても表示されるように
+    setTimeout(() => {
+        document.querySelectorAll(".reveal").forEach(el => el.classList.add("is-visible"));
+    }, 200);
 
     const movieVideos = [
         { id: "xaSqnQR0G2w", title: "Movie 01" },
