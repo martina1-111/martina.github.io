@@ -38,13 +38,31 @@ document.addEventListener("DOMContentLoaded", () => {
         track.className = "carousel-track";
         const dots = document.createElement("div");
         dots.className = "carousel-dots";
+        const controls = document.createElement("div");
+        controls.className = "carousel-controls";
         const windowEl = document.createElement("div");
         windowEl.className = "carousel-window";
         windowEl.appendChild(track);
 
         carousel.innerHTML = "";
         carousel.appendChild(windowEl);
-        carousel.appendChild(dots);
+        carousel.appendChild(controls);
+
+        const prevBtn = document.createElement("button");
+        prevBtn.type = "button";
+        prevBtn.className = "carousel-arrow prev";
+        prevBtn.setAttribute("aria-label", "前の動画へ");
+        prevBtn.textContent = "‹";
+
+        const nextBtn = document.createElement("button");
+        nextBtn.type = "button";
+        nextBtn.className = "carousel-arrow next";
+        nextBtn.setAttribute("aria-label", "次の動画へ");
+        nextBtn.textContent = "›";
+
+        controls.appendChild(prevBtn);
+        controls.appendChild(dots);
+        controls.appendChild(nextBtn);
 
         videos.forEach((video, idx) => {
             const slide = document.createElement("div");
@@ -88,6 +106,16 @@ document.addEventListener("DOMContentLoaded", () => {
             timer = setInterval(() => goTo(index + 1), 3000);
         };
 
+        prevBtn.addEventListener("click", () => {
+            goTo(index - 1);
+            restart();
+        });
+
+        nextBtn.addEventListener("click", () => {
+            goTo(index + 1);
+            restart();
+        });
+
         carousel.addEventListener("mouseenter", stop);
         carousel.addEventListener("mouseleave", restart);
 
@@ -99,9 +127,111 @@ document.addEventListener("DOMContentLoaded", () => {
         buildCarousel(carousel, movieVideos);
     });
 
+    // 画像スライダー（2枚切替）
+    document.querySelectorAll(".image-slider").forEach(slider => {
+        const imgEl = slider.querySelector("img");
+        const list = (slider.dataset.images || "").split(",").map(s => s.trim()).filter(Boolean);
+        if (!imgEl || !list.length) return;
+
+        let index = 0;
+
+        const applySrc = () => {
+            imgEl.src = list[index];
+        };
+
+        const prev = document.createElement("button");
+        prev.type = "button";
+        prev.className = "slider-arrow prev";
+        prev.setAttribute("aria-label", "前の画像");
+        prev.textContent = "‹";
+
+        const next = document.createElement("button");
+        next.type = "button";
+        next.className = "slider-arrow next";
+        next.setAttribute("aria-label", "次の画像");
+        next.textContent = "›";
+
+        prev.addEventListener("click", e => {
+            e.stopPropagation();
+            index = (index - 1 + list.length) % list.length;
+            applySrc();
+        });
+        next.addEventListener("click", e => {
+            e.stopPropagation();
+            index = (index + 1) % list.length;
+            applySrc();
+        });
+
+        if (list.length > 1) {
+            slider.appendChild(prev);
+            slider.appendChild(next);
+        }
+
+        applySrc();
+    });
+
+    // 動画クリックでメタ情報表示（事前入力）
+    const modal = document.createElement("div");
+    modal.className = "comment-modal hidden";
+    modal.innerHTML = `
+        <div class="comment-backdrop"></div>
+        <div class="comment-dialog">
+            <button class="comment-close" aria-label="閉じる">×</button>
+            <p class="comment-title">作品メモ</p>
+            <div class="comment-fields">
+                <p><strong>タイトル：</strong><span class="comment-title-text"></span></p>
+                <p><strong>ジャンル：</strong><span class="comment-genre"></span></p>
+                <p><strong>制作時期：</strong><span class="comment-date"></span></p>
+                <p><strong>担当：</strong><span class="comment-role"></span></p>
+            </div>
+            <div class="comment-actions">
+                <button class="btn ghost small comment-cancel">閉じる</button>
+            </div>
+        </div>
+    `;
+    document.body.appendChild(modal);
+
+    const showModal = info => {
+        modal.classList.remove("hidden");
+        modal.querySelector(".comment-title-text").textContent = info.title || "この動画";
+        modal.querySelector(".comment-genre").textContent = info.genre || "SNS";
+        modal.querySelector(".comment-date").textContent = info.date || "YouTube公開日ベース";
+        modal.querySelector(".comment-role").textContent = info.role || "3DCGモデリング";
+    };
+    const hideModal = () => modal.classList.add("hidden");
+
+    modal.querySelector(".comment-backdrop").addEventListener("click", hideModal);
+    modal.querySelector(".comment-close").addEventListener("click", hideModal);
+    modal.querySelector(".comment-cancel").addEventListener("click", hideModal);
+
+    // メタ情報（ジャンル/制作時期/担当）
+    const videoMeta = {
+        xaSqnQR0G2w: { title: "Movie 01", genre: "SNS", date: "YouTube公開日ベース", role: "3DCGモデリング" },
+        "ee-3TQvW5gM": { title: "Movie 02", genre: "SNS", date: "YouTube公開日ベース", role: "3DCGモデリング" },
+        Dmlf-n2Imp8: { title: "Movie 03", genre: "SNS", date: "YouTube公開日ベース", role: "3DCGモデリング" },
+        H2wptUnWpXU: { title: "Movie 04", genre: "SNS", date: "YouTube公開日ベース", role: "3DCGモデリング" },
+        W_HYgUDwvOc: { title: "Movie 05", genre: "SNS", date: "YouTube公開日ベース", role: "3DCGモデリング" },
+        IJNwhMJiHc8: { title: "Movie 06", genre: "SNS", date: "YouTube公開日ベース", role: "3DCGモデリング" },
+        f8tT4SMlZCc: { title: "Movie 07", genre: "SNS", date: "YouTube公開日ベース", role: "3DCGモデリング" },
+        "8uGQI4pLSbY": { title: "Movie 08", genre: "SNS", date: "YouTube公開日ベース", role: "3DCGモデリング" },
+        "9tCDuMkgqWY": { title: "Movie 09", genre: "SNS", date: "YouTube公開日ベース", role: "3DCGモデリング" },
+        "WvpiN-fBc4w": { title: "Movie 10", genre: "SNS", date: "YouTube公開日ベース", role: "3DCGモデリング" },
+        sPmodSfENCo: { title: "Movie 11", genre: "SNS", date: "YouTube公開日ベース", role: "3DCGモデリング" },
+        T7VwIYroqUg: { title: "Movie 12", genre: "SNS", date: "YouTube公開日ベース", role: "3DCGモデリング" },
+        "wQNNAotOI-4": { title: "Movie 13", genre: "SNS", date: "YouTube公開日ベース", role: "3DCGモデリング" },
+        "5QnNN70VDQA": { title: "Movie 14", genre: "SNS", date: "YouTube公開日ベース", role: "3DCGモデリング" },
+        AlQTWNvVNNY: { title: "Movie 15", genre: "SNS", date: "YouTube公開日ベース", role: "3DCGモデリング" }
+    };
+
     document.querySelectorAll(".video-embed").forEach(container => {
         const videoId = container.dataset.videoId;
-        const title = container.dataset.title || "YouTube video";
+        const meta = videoMeta[videoId] || {};
+        const title = meta.title || container.dataset.title || "YouTube video";
+        if (meta.genre) container.dataset.genre = meta.genre;
+        if (meta.date) container.dataset.date = meta.date;
+        if (meta.role) container.dataset.role = meta.role;
+        container.dataset.title = title;
+
         if (videoId && !videoId.startsWith("VIDEO_ID")) {
             const iframe = document.createElement("iframe");
             iframe.src = `https://www.youtube.com/embed/${videoId}?rel=0&autoplay=1&mute=1&playsinline=1&loop=1&playlist=${videoId}`;
@@ -116,55 +246,15 @@ document.addEventListener("DOMContentLoaded", () => {
             placeholder.textContent = container.dataset.caption || "YouTubeリンクをここに設定してください。";
             container.appendChild(placeholder);
         }
-    });
 
-    // 動画クリックでコメント入力ポップアップ
-    const modal = document.createElement("div");
-    modal.className = "comment-modal hidden";
-    modal.innerHTML = `
-        <div class="comment-backdrop"></div>
-        <div class="comment-dialog">
-            <button class="comment-close" aria-label="閉じる">×</button>
-            <p class="comment-title">ひと言メモ</p>
-            <p class="comment-target"></p>
-            <label class="comment-label">
-                制作時期・日付
-                <input class="comment-date" type="text" placeholder="例: 2024年12月 / 2024.12.10" />
-            </label>
-            <textarea class="comment-input" rows="3" placeholder="ひと言コメントをここに"></textarea>
-            <div class="comment-actions">
-                <button class="btn ghost small comment-cancel">閉じる</button>
-                <button class="btn primary small comment-save">メモする</button>
-            </div>
-        </div>
-    `;
-    document.body.appendChild(modal);
-
-    const showModal = targetTitle => {
-        modal.classList.remove("hidden");
-        modal.querySelector(".comment-target").textContent = targetTitle || "この動画";
-        modal.querySelector(".comment-input").value = "";
-        modal.querySelector(".comment-date").value = "";
-    };
-    const hideModal = () => modal.classList.add("hidden");
-
-    modal.querySelector(".comment-backdrop").addEventListener("click", hideModal);
-    modal.querySelector(".comment-close").addEventListener("click", hideModal);
-    modal.querySelector(".comment-cancel").addEventListener("click", hideModal);
-    modal.querySelector(".comment-save").addEventListener("click", () => {
-        const text = modal.querySelector(".comment-input").value.trim();
-        const date = modal.querySelector(".comment-date").value.trim();
-        if (text || date) {
-            alert(`メモしました${date ? ` [時期: ${date}]` : ""}${text ? `\n${text}` : ""}`);
-        }
-        hideModal();
-    });
-
-    document.querySelectorAll(".video-embed").forEach(container => {
         container.addEventListener("click", event => {
             event.preventDefault();
-            const title = container.dataset.title || "この動画";
-            showModal(title);
+            showModal({
+                title: container.dataset.title,
+                genre: container.dataset.genre,
+                date: container.dataset.date,
+                role: container.dataset.role
+            });
         });
     });
 
