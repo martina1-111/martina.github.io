@@ -84,6 +84,8 @@ ul { list-style: none; }
     color: var(--text-main);
     transition: color 0.25s ease, opacity 0.25s ease;
     position: relative;
+    padding: 8px 12px;
+    border-radius: 999px;
 }
 
 .site-header nav a:hover {
@@ -91,17 +93,10 @@ ul { list-style: none; }
 }
 
 .site-header nav a.active {
-    color: var(--accent);
-}
-
-.site-header nav a.active::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    bottom: -6px;
-    width: 100%;
-    height: 2px;
-    background: var(--accent);
+    color: #111;
+    background: var(--accent-soft);
+    border: 1.5px solid var(--accent);
+    box-shadow: 0 4px 0 var(--accent);
 }
 
 .btn {
@@ -573,7 +568,7 @@ ul { list-style: none; }
     border-radius: 12px;
     padding: 12px 14px;
     color: inherit;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    transition: transform 0.2s ease;
 }
 
 .entry-card:hover {
