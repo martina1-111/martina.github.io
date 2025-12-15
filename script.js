@@ -104,7 +104,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const title = container.dataset.title || "YouTube video";
         if (videoId && !videoId.startsWith("VIDEO_ID")) {
             const iframe = document.createElement("iframe");
-            iframe.src = `https://www.youtube.com/embed/${videoId}?rel=0&autoplay=1&mute=1&playsinline=1`;
+            iframe.src = `https://www.youtube.com/embed/${videoId}?rel=0&autoplay=1&mute=1&playsinline=1&loop=1&playlist=${videoId}`;
             iframe.title = title;
             iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
             iframe.allowFullscreen = true;
