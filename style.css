@@ -129,7 +129,7 @@ body.dark-page {
 }
 
 .nav-dropdown {
-    display: flex;
+    display: none;
     position: absolute;
     top: 100%;
     left: 0;
@@ -166,7 +166,9 @@ body.dark-page {
     transform: rotate(180deg);
 }
 
-.has-dropdown:hover .nav-dropdown {
+.has-dropdown:hover .nav-dropdown,
+.has-dropdown:focus-within .nav-dropdown {
+    display: flex;
     pointer-events: auto;
     opacity: 1;
     visibility: visible;
