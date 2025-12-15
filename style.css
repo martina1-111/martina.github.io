@@ -367,8 +367,8 @@ ul { list-style: none; }
 
 .gallery-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 16px;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 14px;
 }
 
 .gallery-card {
@@ -387,7 +387,7 @@ ul { list-style: none; }
 
 .gallery-card img {
     width: 100%;
-    height: 240px;
+    height: 220px;
     object-fit: cover;
     display: block;
 }
@@ -480,17 +480,17 @@ ul { list-style: none; }
 
 .profile-compact {
     display: grid;
-    grid-template-columns: 110px 1fr;
-    gap: 14px;
+    grid-template-columns: 140px 1fr;
+    gap: 16px;
     align-items: flex-start;
-    margin-bottom: 12px;
+    margin-bottom: 14px;
 }
 
 .profile-compact img {
-    width: 110px;
-    height: 110px;
+    width: 140px;
+    height: 140px;
     object-fit: cover;
-    border-radius: 12px;
+    border-radius: 14px;
     border: 1.5px solid #111;
     align-self: flex-start;
 }
