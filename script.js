@@ -40,4 +40,13 @@ document.addEventListener("DOMContentLoaded", () => {
             target.scrollIntoView({ behavior: "smooth", block: "start" });
         });
     });
+
+    // 現在年月を表示（例: 2025年12月現在）
+    const currentHint = document.querySelector('[data-current-month]');
+    if (currentHint) {
+        const now = new Date();
+        const year = now.getFullYear();
+        const month = now.getMonth() + 1;
+        currentHint.textContent = `${year}年${month}月現在`;
+    }
 });
