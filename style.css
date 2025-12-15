@@ -437,7 +437,7 @@ ul { list-style: none; }
     display: grid;
     grid-template-columns: 110px 1fr;
     gap: 14px;
-    align-items: center;
+    align-items: flex-start;
     margin-bottom: 12px;
 }
 
@@ -447,6 +447,7 @@ ul { list-style: none; }
     object-fit: cover;
     border-radius: 12px;
     border: 1.5px solid #111;
+    align-self: flex-start;
 }
 
 .profile-main h2 {
