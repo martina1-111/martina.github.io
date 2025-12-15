@@ -129,7 +129,7 @@ body.dark-page {
 }
 
 .nav-dropdown {
-    display: none;
+    display: flex;
     position: absolute;
     top: 100%;
     left: 0;
@@ -144,6 +144,9 @@ body.dark-page {
     gap: 4px;
     z-index: 20;
     pointer-events: none;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.15s ease, transform 0.15s ease;
 }
 
 .has-dropdown > a {
@@ -164,8 +167,10 @@ body.dark-page {
 }
 
 .has-dropdown:hover .nav-dropdown {
-    display: flex;
     pointer-events: auto;
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(4px);
 }
 
 .nav-dropdown a {
