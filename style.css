@@ -387,9 +387,75 @@ ul { list-style: none; }
 
 .gallery-card img {
     width: 100%;
-    height: 220px;
-    object-fit: cover;
+    height: 260px;
+    object-fit: contain;
     display: block;
+    background: #f8f8f8;
+    padding: 8px;
+}
+
+.comment-modal {
+    position: fixed;
+    inset: 0;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 999;
+}
+
+.comment-modal:not(.hidden) {
+    display: flex;
+}
+
+.comment-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+}
+
+.comment-dialog {
+    position: relative;
+    background: #fff;
+    border: 1.5px solid #111;
+    border-radius: 12px;
+    padding: 18px;
+    width: min(90vw, 420px);
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.comment-close {
+    position: absolute;
+    top: 8px;
+    right: 10px;
+    background: transparent;
+    border: none;
+    font-size: 1.1rem;
+    cursor: pointer;
+}
+
+.comment-title {
+    font-weight: 700;
+}
+
+.comment-target {
+    color: var(--text-sub);
+}
+
+.comment-input {
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 8px;
+    font-family: var(--font-jp);
+}
+
+.comment-actions {
+    display: flex;
+    gap: 8px;
+    justify-content: flex-end;
 }
 
 .gallery-card figcaption {

@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const title = container.dataset.title || "YouTube video";
         if (videoId && !videoId.startsWith("VIDEO_ID")) {
             const iframe = document.createElement("iframe");
-            iframe.src = `https://www.youtube.com/embed/${videoId}?rel=0`;
+            iframe.src = `https://www.youtube.com/embed/${videoId}?rel=0&autoplay=1&mute=1&playsinline=1`;
             iframe.title = title;
             iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
             iframe.allowFullscreen = true;
@@ -29,6 +29,49 @@ document.addEventListener("DOMContentLoaded", () => {
             placeholder.textContent = container.dataset.caption || "YouTubeリンクをここに設定してください。";
             container.appendChild(placeholder);
         }
+    });
+
+    // 動画クリックでコメント入力ポップアップ
+    const modal = document.createElement("div");
+    modal.className = "comment-modal hidden";
+    modal.innerHTML = `
+        <div class="comment-backdrop"></div>
+        <div class="comment-dialog">
+            <button class="comment-close" aria-label="閉じる">×</button>
+            <p class="comment-title">ひと言メモ</p>
+            <p class="comment-target"></p>
+            <textarea class="comment-input" rows="3" placeholder="ひと言コメントをここに"></textarea>
+            <div class="comment-actions">
+                <button class="btn ghost small comment-cancel">閉じる</button>
+                <button class="btn primary small comment-save">メモする</button>
+            </div>
+        </div>
+    `;
+    document.body.appendChild(modal);
+
+    const showModal = targetTitle => {
+        modal.classList.remove("hidden");
+        modal.querySelector(".comment-target").textContent = targetTitle || "この動画";
+        modal.querySelector(".comment-input").value = "";
+    };
+    const hideModal = () => modal.classList.add("hidden");
+
+    modal.querySelector(".comment-backdrop").addEventListener("click", hideModal);
+    modal.querySelector(".comment-close").addEventListener("click", hideModal);
+    modal.querySelector(".comment-cancel").addEventListener("click", hideModal);
+    modal.querySelector(".comment-save").addEventListener("click", () => {
+        const text = modal.querySelector(".comment-input").value.trim();
+        if (text) {
+            alert(`メモしました: ${text}`);
+        }
+        hideModal();
+    });
+
+    document.querySelectorAll(".video-embed").forEach(container => {
+        container.addEventListener("click", () => {
+            const title = container.dataset.title || "この動画";
+            showModal(title);
+        });
     });
 
     document.querySelectorAll('a[href^="#"]').forEach(link => {
