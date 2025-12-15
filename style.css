@@ -448,9 +448,9 @@ ul { list-style: none; }
 
 .resume-card {
     background: #fff;
-    border: 1.5px solid #111;
-    border-radius: 12px;
-    padding: 18px;
+    border: 1.8px solid #111;
+    border-radius: 18px;
+    padding: 22px;
 }
 
 .resume-title {
