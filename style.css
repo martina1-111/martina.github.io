@@ -451,6 +451,33 @@ ul { list-style: none; }
     box-shadow: 8px 8px 0 #111;
 }
 
+.profile-header {
+    display: grid;
+    grid-template-columns: 180px 1fr;
+    gap: 20px;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+.profile-header img {
+    width: 180px;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 16px;
+    border: 2px solid #111;
+}
+
+.profile-text h2 {
+    margin-bottom: 10px;
+    font-size: clamp(1.6rem, 2.4vw, 2rem);
+}
+
+.profile-text p {
+    font-family: var(--font-jp);
+    color: var(--text-sub);
+    line-height: 1.7;
+}
+
 .resume {
     display: grid;
     gap: 12px;
