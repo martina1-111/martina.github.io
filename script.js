@@ -17,23 +17,40 @@ document.addEventListener("DOMContentLoaded", () => {
         document.querySelectorAll(".reveal").forEach(el => el.classList.add("is-visible"));
     }, 200);
 
-    const movieVideos = [
-        { id: "xaSqnQR0G2w", title: "Movie 01" },
-        { id: "ee-3TQvW5gM", title: "Movie 02" },
-        { id: "Dmlf-n2Imp8", title: "Movie 03" },
-        { id: "H2wptUnWpXU", title: "Movie 04" },
-        { id: "W_HYgUDwvOc", title: "Movie 05" },
-        { id: "IJNwhMJiHc8", title: "Movie 06" },
-        { id: "f8tT4SMlZCc", title: "Movie 07" },
-        { id: "8uGQI4pLSbY", title: "Movie 08" },
-        { id: "9tCDuMkgqWY", title: "Movie 09" },
-        { id: "WvpiN-fBc4w", title: "Movie 10" },
-        { id: "sPmodSfENCo", title: "Movie 11" },
-        { id: "T7VwIYroqUg", title: "Movie 12" },
-        { id: "wQNNAotOI-4", title: "Movie 13" },
-        { id: "5QnNN70VDQA", title: "Movie 14" },
-        { id: "AlQTWNvVNNY", title: "Movie 15" }
+    const defaultVideos = [
+        // movie
+        { id: "xaSqnQR0G2w", title: "Movie 01", genre: "SNS", date: "2025年10月", role: "3DCGモデリング", category: "video" },
+        { id: "ee-3TQvW5gM", title: "Movie 02", genre: "SNS", date: "2025年10月", role: "3DCGモデリング", category: "video" },
+        { id: "Dmlf-n2Imp8", title: "Movie 03", genre: "SNS", date: "2025年10月", role: "3DCGモデリング", category: "video" },
+        { id: "H2wptUnWpXU", title: "Movie 04", genre: "SNS", date: "2025年10月", role: "3DCGモデリング", category: "video" },
+        { id: "W_HYgUDwvOc", title: "Movie 05", genre: "SNS", date: "2025年10月", role: "3DCGモデリング", category: "video" },
+        { id: "IJNwhMJiHc8", title: "Movie 06", genre: "SNS", date: "2025年10月", role: "3DCGモデリング", category: "video" },
+        { id: "f8tT4SMlZCc", title: "Movie 07", genre: "SNS", date: "2025年10月", role: "3DCGモデリング", category: "video" },
+        { id: "8uGQI4pLSbY", title: "Movie 08", genre: "SNS", date: "2025年10月", role: "3DCGモデリング", category: "video" },
+        { id: "9tCDuMkgqWY", title: "Movie 09", genre: "SNS", date: "2025年10月", role: "3DCGモデリング", category: "video" },
+        { id: "WvpiN-fBc4w", title: "Movie 10", genre: "SNS", date: "2025年10月", role: "3DCGモデリング", category: "video" },
+        { id: "sPmodSfENCo", title: "Movie 11", genre: "SNS", date: "2025年10月", role: "3DCGモデリング", category: "video" },
+        { id: "T7VwIYroqUg", title: "Movie 12", genre: "SNS", date: "2025年10月", role: "3DCGモデリング", category: "video" },
+        { id: "wQNNAotOI-4", title: "Movie 13", genre: "SNS", date: "2025年10月", role: "3DCGモデリング", category: "video" },
+        { id: "5QnNN70VDQA", title: "Movie 14", genre: "SNS", date: "2025年10月", role: "3DCGモデリング", category: "video" },
+        { id: "AlQTWNvVNNY", title: "Movie 15", genre: "SNS", date: "2025年10月", role: "3DCGモデリング", category: "video" },
+        // cg
+        { id: "IvZsmy8oas0", title: "CG Movie 01", genre: "SNS", date: "2025年10月", role: "3DCGモデリング", category: "cg" },
+        { id: "yVxMx-P8A74", title: "CG Movie 02", genre: "SNS", date: "2025年10月", role: "3DCGモデリング", category: "cg" },
+        { id: "mkumK-GRQHE", title: "CG Movie 03", genre: "SNS", date: "2025年10月", role: "3DCGモデリング", category: "cg" },
+        { id: "zslrOJpWziE", title: "CG Movie 04", genre: "SNS", date: "2025年10月", role: "3DCGモデリング", category: "cg" },
+        { id: "ou1uztupxsI", title: "CG Movie 05", genre: "SNS", date: "2025年10月", role: "3DCGモデリング", category: "cg" },
+        { id: "HjcYQzdPwm0", title: "CG Movie 06", genre: "SNS", date: "2025年10月", role: "3DCGモデリング", category: "cg" },
+        { id: "wXOhpcx_raM", title: "CG Movie 07", genre: "SNS", date: "2025年10月", role: "3DCGモデリング", category: "cg" },
+        { id: "zPxjajyPxig", title: "CG Movie 08", genre: "SNS", date: "2025年10月", role: "3DCGモデリング", category: "cg" },
+        { id: "o5BesyscRIU", title: "CG Movie 09", genre: "SNS", date: "2025年10月", role: "3DCGモデリング", category: "cg" },
+        { id: "cuKyo7xhUJs", title: "CG Movie 10", genre: "SNS", date: "2025年10月", role: "3DCGモデリング", category: "cg" },
+        { id: "GVgCpK0RKWs", title: "CG Movie 11", genre: "SNS", date: "2025年10月", role: "3DCGモデリング", category: "cg" },
+        { id: "XTdRArvaU-g", title: "CG Movie 12", genre: "SNS", date: "2025年10月", role: "3DCGモデリング", category: "cg" }
     ];
+
+    const stored = localStorage.getItem("videoDataV1");
+    const videoData = stored ? JSON.parse(stored) : defaultVideos;
 
     const buildCarousel = (carousel, videos) => {
         if (!carousel || !videos.length) return;
@@ -128,7 +145,46 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     document.querySelectorAll('[data-carousel="movie"]').forEach(carousel => {
-        buildCarousel(carousel, movieVideos);
+        const vids = videoData.filter(v => v.category === "video");
+        buildCarousel(carousel, vids);
+    });
+
+    const renderList = (container, category) => {
+        const list = videoData.filter(v => v.category === category);
+        container.innerHTML = "";
+        list.forEach(item => {
+            const card = document.createElement("div");
+            card.className = "video-card reveal";
+            const embed = document.createElement("div");
+            embed.className = "video-embed";
+            const iframe = document.createElement("iframe");
+            iframe.src = `https://www.youtube.com/embed/${item.id}?rel=0&autoplay=1&mute=1&playsinline=1&loop=1&playlist=${item.id}`;
+            iframe.title = item.title || "YouTube video";
+            iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
+            iframe.allowFullscreen = true;
+            iframe.loading = "lazy";
+            embed.appendChild(iframe);
+
+            const meta = document.createElement("div");
+            meta.className = "video-meta";
+            meta.innerHTML = `
+                <h3>${item.title || "Untitled"}</h3>
+                <p class="meta-line">ジャンル: ${item.genre || "-"}</p>
+                <p class="meta-line">制作時期: ${item.date || "-"}</p>
+                <p class="meta-line">担当: ${item.role || "-"}</p>
+            `;
+
+            card.appendChild(embed);
+            card.appendChild(meta);
+            container.appendChild(card);
+        });
+        // 再度revealを適用
+        document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
+    };
+
+    document.querySelectorAll("[data-list]").forEach(container => {
+        const category = container.dataset.list;
+        renderList(container, category);
     });
 
     // 画像スライダー（2枚切替）
