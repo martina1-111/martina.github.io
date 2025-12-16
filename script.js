@@ -237,6 +237,12 @@ document.addEventListener("DOMContentLoaded", () => {
         container.dataset.title = title;
 
         if (videoId && !videoId.startsWith("VIDEO_ID")) {
+            // サムネイルを背景にセット（iframe読み込み前でも見えるように）
+            const thumb = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
+            container.style.backgroundImage = `url(${thumb})`;
+            container.style.backgroundSize = "cover";
+            container.style.backgroundPosition = "center";
+
             const iframe = document.createElement("iframe");
             iframe.src = `https://www.youtube.com/embed/${videoId}?rel=0&autoplay=1&mute=1&playsinline=1&loop=1&playlist=${videoId}`;
             iframe.title = title;
