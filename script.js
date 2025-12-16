@@ -228,6 +228,9 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     document.querySelectorAll(".video-embed").forEach(container => {
+        // すでにiframeが入っている場合は何もしない（HTML側で直書きのとき用）
+        if (container.querySelector("iframe")) return;
+
         const videoId = container.dataset.videoId;
         const meta = videoMeta[videoId] || {};
         const title = meta.title || container.dataset.title || "YouTube video";
