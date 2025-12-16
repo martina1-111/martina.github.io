@@ -758,6 +758,8 @@ body.dark-page {
 
 .video-card .video-embed {
     border-radius: 0;
+    padding-top: 56.25%;
+    height: auto;
 }
 
 .video-card .video-meta {

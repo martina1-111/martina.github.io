@@ -237,19 +237,6 @@ document.addEventListener("DOMContentLoaded", () => {
         container.dataset.title = title;
 
         if (videoId && !videoId.startsWith("VIDEO_ID")) {
-            const thumb = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
-            // サムネイル画像を先に表示（iframeがブロックされても見えるように）
-            const thumbImg = document.createElement("img");
-            thumbImg.src = thumb;
-            thumbImg.alt = title;
-            thumbImg.loading = "lazy";
-            thumbImg.style.position = "absolute";
-            thumbImg.style.inset = "0";
-            thumbImg.style.width = "100%";
-            thumbImg.style.height = "100%";
-            thumbImg.style.objectFit = "cover";
-            container.appendChild(thumbImg);
-
             const iframe = document.createElement("iframe");
             iframe.src = `https://www.youtube.com/embed/${videoId}?rel=0&autoplay=1&mute=1&playsinline=1&loop=1&playlist=${videoId}`;
             iframe.title = title;
