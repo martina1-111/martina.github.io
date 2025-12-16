@@ -845,6 +845,21 @@ body.dark-page {
     font-family: var(--font-jp);
 }
 
+.project-thumb {
+    width: 100%;
+    overflow: hidden;
+    border-radius: 10px;
+    border: 1px solid rgba(0,0,0,0.08);
+    margin-bottom: 10px;
+    background: #f8f8f8;
+}
+
+.project-thumb img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
 .project-meta {
     display: flex;
     flex-wrap: wrap;
