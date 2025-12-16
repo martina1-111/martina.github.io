@@ -860,6 +860,50 @@ body.dark-page {
     display: block;
 }
 
+.stacked-list {
+    display: grid;
+    gap: 40px;
+}
+
+.stack-item {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+    align-items: center;
+}
+
+.stack-text h4 {
+    font-size: 1.4rem;
+    margin-bottom: 6px;
+}
+
+.stack-text .period {
+    font-size: 0.9rem;
+    color: var(--text-sub);
+    letter-spacing: 0.05em;
+    margin-bottom: 6px;
+}
+
+.stack-text p {
+    color: var(--text-sub);
+    font-family: var(--font-jp);
+    margin-bottom: 10px;
+}
+
+.stack-thumb {
+    width: 100%;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid rgba(0,0,0,0.08);
+    background: #f8f8f8;
+}
+
+.stack-thumb img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
 .project-meta {
     display: flex;
     flex-wrap: wrap;
