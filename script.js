@@ -103,7 +103,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const embed = document.createElement("div");
             embed.className = "video-embed";
             const iframe = document.createElement("iframe");
-            iframe.src = `https://www.youtube.com/embed/${video.id}?rel=0&autoplay=1&mute=1&playsinline=1&loop=1&playlist=${video.id}`;
+            iframe.src = `https://www.youtube.com/embed/${video.id}?rel=0&autoplay=1&mute=1&playsinline=1&loop=1&playlist=${video.id}&controls=0&modestbranding=1&iv_load_policy=3`;
             iframe.title = video.title || "YouTube video";
             iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
             iframe.allowFullscreen = true;
@@ -170,7 +170,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const embed = document.createElement("div");
             embed.className = "video-embed";
             const iframe = document.createElement("iframe");
-            iframe.src = `https://www.youtube.com/embed/${item.id}?rel=0&autoplay=1&mute=1&playsinline=1&loop=1&playlist=${item.id}`;
+            iframe.src = `https://www.youtube.com/embed/${item.id}?rel=0&autoplay=1&mute=1&playsinline=1&loop=1&playlist=${item.id}&controls=0&modestbranding=1&iv_load_policy=3`;
             iframe.title = item.title || "YouTube video";
             iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
             iframe.allowFullscreen = true;
