@@ -246,13 +246,14 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     // ---------- Contact form ----------
-    let contactCounter = 0;
-
     const bindContactForm = () => {
         const form = document.getElementById("contact-form");
         if (!form) return;
 
-        form.addEventListener("submit", event => {
+        const SHEETS_ENDPOINT = ""; // ここにGoogle Apps ScriptなどのエンドポイントURLを設定してください
+        let counter = 0;
+
+        form.addEventListener("submit", async event => {
             event.preventDefault();
             const formData = new FormData(form);
             const name = formData.get("name")?.toString().trim();
@@ -267,14 +268,30 @@ document.addEventListener("DOMContentLoaded", () => {
                 return;
             }
 
-            contactCounter += 1;
-            const subject = encodeURIComponent(`サイトからの問い合わせ#${contactCounter}`);
-            const body = encodeURIComponent(
-                `お名前: ${name}\nふりがな: ${furigana || ""}\n会社名: ${company || ""}\nメール: ${email}\n電話番号: ${phone || ""}\nお問い合わせ内容:\n${message}`
-            );
-            window.location.href = `mailto:m.kawaguchi68@gmail.com?subject=${subject}&body=${body}`;
+            counter += 1;
+            const payload = {
+                subject: `サイトからの問い合わせ#${counter}`,
+                name,
+                furigana,
+                company,
+                email,
+                phone,
+                message
+            };
 
-            // TODO: Google Sheets連携を追加する場合はここに送信処理を実装
+            try {
+                if (!SHEETS_ENDPOINT) {
+                    throw new Error("送信先エンドポイントが未設定です");
+                }
+                await fetch(SHEETS_ENDPOINT, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(payload)
+                });
+            } catch (err) {
+                console.error(err);
+                alert("サーバーへの送信ができませんでした。エンドポイント設定が必要です。");
+            }
 
             form.reset();
             window.location.href = "thanks.html";
