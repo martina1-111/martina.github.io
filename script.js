@@ -345,44 +345,39 @@ document.addEventListener("DOMContentLoaded", () => {
     init();
 });
 
-// ---------- Splash (Highights) ----------
+// ---------- Splash (Highlights marquee) ----------
 document.addEventListener("DOMContentLoaded", () => {
     const splash = document.getElementById("splash");
     if (!splash) return;
 
     const slides = [
-        { title: "映像インタビュー", desc: "進研ゼミ 学び方コンテンツ出演", tag: "Movie" },
-        { title: "キッズワークショップ2022", desc: "メタバースイベントスタッフ", tag: "Event" },
-        { title: "ソフトバンク様3D映像制作", desc: "展示向け3Dコンテンツ制作", tag: "3DCG" },
-        { title: "新しい働き方AWARD 登壇", desc: "クロストーク登壇/受賞", tag: "Talk" }
+        { title: "ソフトバンク様3D映像制作", desc: "展示向け3Dコンテンツ", img: "CG/cg-softbank-20241208.webp" },
+        { title: "Faint Hope", desc: "ショートフィルム用ルック", img: "CG/『Faint Hope』.webp" },
+        { title: "Happy Valentine", desc: "演出ビジュアル", img: "CG/Happy Valentine01.webp" },
+        { title: "ガーリーなお部屋", desc: "インテリアCG", img: "CG/cg-girly-room-01.webp" },
+        { title: "Articles", desc: "noteで執筆", img: "assets/articles-note.webp" },
+        { title: "WEB制作", desc: "株式会社スムージースタジオ", img: "assets/web-smoothie.webp" },
+        { title: "the Chosen Ones", desc: "キャラクタービジュアル", img: "CG/『the Chosen Ones』01.webp" }
     ];
 
-    const titleEl = splash.querySelector(".splash-title");
-    const descEl = splash.querySelector(".splash-desc");
-    const tagEl = splash.querySelector(".splash-tag");
-    let idx = 0;
-
-    const render = () => {
-        const s = slides[idx];
-        titleEl.textContent = s.title;
-        descEl.textContent = s.desc;
-        tagEl.textContent = s.tag;
-    };
-
-    const next = () => {
-        idx = (idx + 1) % slides.length;
-        render();
-    };
+    const track = splash.querySelector(".splash-track");
+    slides.concat(slides).forEach(item => {
+        const cell = document.createElement("div");
+        cell.className = "splash-item";
+        cell.innerHTML = `
+            <div class="splash-thumb" style="background-image:url('${item.img}')"></div>
+            <div class="splash-meta">
+                <p class="splash-item-title">${item.title}</p>
+                <p class="splash-item-desc">${item.desc}</p>
+            </div>
+        `;
+        track.appendChild(cell);
+    });
 
     const close = () => splash.classList.add("hidden");
 
     splash.querySelector(".splash-close").addEventListener("click", close);
-    splash.addEventListener("click", e => {
-        if (e.target === splash) close();
-    });
+    splash.addEventListener("click", e => { if (e.target === splash) close(); });
 
-    render();
     splash.classList.remove("hidden");
-    const timer = setInterval(next, 2000);
-    splash.addEventListener("mouseenter", () => clearInterval(timer));
 });
