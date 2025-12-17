@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact | Marina Kawaguchi</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="background-glow"></div>
+
+    <header class="site-header">
+        <div class="container nav-layout">
+            <a class="logo" href="index.html">
+                <img src="assets/martina_logo.png" alt="Marina Kawaguchi logo">
+            </a>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Top</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li class="has-dropdown">
+                        <a href="works.html">Works</a>
+                        <ul class="nav-dropdown">
+                            <li><a href="works.html">All</a></li>
+                            <li><a href="cg.html">CG</a></li>
+                            <li><a href="video.html">Video</a></li>
+                            <li><a href="graphics.html">Graphics</a></li>
+                            <li><a href="web.html">WEB</a></li>
+                            <li><a href="articles.html">Articles</a></li>
+                            <li><a href="others.html">Others</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+            <a class="btn ghost small active" href="contact.html">Contact</a>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero hero-page">
+            <div class="container hero-grid">
+                <div class="hero-copy reveal">
+                    <p class="eyebrow">Contact</p>
+                    <h1>お問い合わせフォーム</h1>
+                    <p class="lede">下記フォームにご記入いただくと、自動でメールが立ち上がります。記録はブラウザに保存されます。</p>
+                    <div class="chip-row">
+                        <span class="chip">サイトからの問い合わせ</span>
+                        <span class="chip ghost">自動で件名に番号付与</span>
+                        <span class="chip ghost">ローカル履歴保存</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section contact-form-section">
+            <div class="container contact-layout">
+                <form id="contact-form" class="contact-card reveal">
+                    <div class="form-row">
+                        <label for="name">お名前<span class="req">*</span></label>
+                        <input id="name" name="name" type="text" required placeholder="山田 太郎">
+                    </div>
+                    <div class="form-row">
+                        <label for="furigana">ふりがな</label>
+                        <input id="furigana" name="furigana" type="text" placeholder="やまだ たろう">
+                    </div>
+                    <div class="form-row">
+                        <label for="company">会社名</label>
+                        <input id="company" name="company" type="text" placeholder="株式会社 ○○">
+                    </div>
+                    <div class="form-row">
+                        <label for="email">メールアドレス<span class="req">*</span></label>
+                        <input id="email" name="email" type="email" required placeholder="m.kawaguchi68@gmail.com">
+                    </div>
+                    <div class="form-row">
+                        <label for="phone">電話番号</label>
+                        <input id="phone" name="phone" type="tel" placeholder="090-1234-5678">
+                    </div>
+                    <div class="form-row">
+                        <label for="message">お問い合わせ内容<span class="req">*</span></label>
+                        <textarea id="message" name="message" rows="4" required placeholder="ご相談内容をご記入ください。"></textarea>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="btn primary">送信</button>
+                        <p class="hint">送信するとメールが起動し、件名は自動で「サイトからの問い合わせ#番号」になります。</p>
+                    </div>
+                </form>
+
+                <div class="contact-history reveal">
+                    <div class="history-head">
+                        <h3>送信履歴（ブラウザに保存）</h3>
+                        <span class="hint">最新から最大50件を保持します</span>
+                    </div>
+                    <div class="history-list" data-contact-history></div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container footer-content">
+            <span>© Marina Kawaguchi</span>
+            <span>Design / CG / Web / MR</span>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

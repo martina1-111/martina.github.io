@@ -1140,6 +1140,111 @@ body.dark-page {
     font-family: var(--font-jp);
 }
 
+.contact-form-section {
+    padding: 40px 0 80px;
+}
+
+.contact-layout {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 28px;
+}
+
+.contact-card,
+.contact-history {
+    background: #fff;
+    border: 1.5px solid #111;
+    border-radius: 14px;
+    padding: 22px;
+    box-shadow: 12px 12px 0 #111;
+}
+
+.contact-card .form-row {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 14px;
+}
+
+.contact-card label {
+    font-weight: 700;
+    display: flex;
+    gap: 4px;
+    align-items: center;
+}
+
+.contact-card input,
+.contact-card textarea {
+    border: 1.5px solid #111;
+    border-radius: 10px;
+    padding: 10px 12px;
+    font-family: var(--font-jp);
+    background: #f8f8f8;
+}
+
+.contact-card textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+.req {
+    color: var(--accent);
+}
+
+.form-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.contact-history .history-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+}
+
+.history-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.history-entry {
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 12px;
+    background: #fafafa;
+}
+
+.history-title {
+    font-weight: 700;
+}
+
+.history-meta {
+    color: var(--text-sub);
+}
+
+.history-desc {
+    color: var(--text-main);
+    margin-top: 4px;
+    white-space: pre-wrap;
+}
+
+@media (max-width: 900px) {
+    .contact-layout {
+        grid-template-columns: 1fr;
+    }
+    .contact-card,
+    .contact-history {
+        box-shadow: 8px 8px 0 #111;
+    }
+    .form-actions {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
 .dark-page .project-card,
 .dark-page .gallery-card,
 .dark-page .resume-card,

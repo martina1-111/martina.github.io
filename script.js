@@ -245,6 +245,96 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     };
 
+    // ---------- Contact form ----------
+    const CONTACT_HISTORY_KEY = "contactHistory";
+    const CONTACT_COUNTER_KEY = "contactCounter";
+
+    const loadContactHistory = () => {
+        try {
+            const parsed = JSON.parse(localStorage.getItem(CONTACT_HISTORY_KEY) || "[]");
+            return Array.isArray(parsed) ? parsed : [];
+        } catch {
+            return [];
+        }
+    };
+
+    const saveContactHistory = history => {
+        localStorage.setItem(CONTACT_HISTORY_KEY, JSON.stringify(history.slice(0, 50)));
+    };
+
+    const renderContactHistory = () => {
+        const list = document.querySelector("[data-contact-history]");
+        if (!list) return;
+        const history = loadContactHistory();
+        if (!history.length) {
+            list.innerHTML = '<p class="hint">まだ履歴はありません。</p>';
+            return;
+        }
+        list.innerHTML = "";
+        history.forEach(item => {
+            const entry = document.createElement("div");
+            entry.className = "history-entry";
+            entry.innerHTML = `
+                <div>
+                    <p class="history-title">#${item.id} ${item.name || "お名前未入力"}</p>
+                    <p class="history-meta">${item.date || ""}</p>
+                </div>
+                <p class="history-desc">${item.message || ""}</p>
+            `;
+            list.appendChild(entry);
+        });
+    };
+
+    const bindContactForm = () => {
+        const form = document.getElementById("contact-form");
+        if (!form) return;
+
+        form.addEventListener("submit", event => {
+            event.preventDefault();
+            const formData = new FormData(form);
+            const name = formData.get("name")?.toString().trim();
+            const furigana = formData.get("furigana")?.toString().trim();
+            const company = formData.get("company")?.toString().trim();
+            const email = formData.get("email")?.toString().trim();
+            const phone = formData.get("phone")?.toString().trim();
+            const message = formData.get("message")?.toString().trim();
+
+            if (!name || !email || !message) {
+                alert("必須項目（お名前、メールアドレス、お問い合わせ内容）を入力してください。");
+                return;
+            }
+
+            const counter = Number(localStorage.getItem(CONTACT_COUNTER_KEY) || "0") + 1;
+            localStorage.setItem(CONTACT_COUNTER_KEY, String(counter));
+
+            const entry = {
+                id: counter,
+                name,
+                furigana,
+                company,
+                email,
+                phone,
+                message,
+                date: new Date().toLocaleString()
+            };
+
+            const history = loadContactHistory();
+            history.unshift(entry);
+            saveContactHistory(history);
+
+            const subject = encodeURIComponent(`サイトからの問い合わせ#${counter}`);
+            const body = encodeURIComponent(
+                `お名前: ${name}\nふりがな: ${furigana || ""}\n会社名: ${company || ""}\nメール: ${email}\n電話番号: ${phone || ""}\nお問い合わせ内容:\n${message}`
+            );
+            window.location.href = `mailto:m.kawaguchi68@gmail.com?subject=${subject}&body=${body}`;
+
+            form.reset();
+            renderContactHistory();
+        });
+
+        renderContactHistory();
+    };
+
     const initAnchors = () => {
         document.querySelectorAll('a[href^="#"]').forEach(link => {
             link.addEventListener("click", event => {
@@ -281,6 +371,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         applyReveal();
         bindModal();
+        bindContactForm();
         initAnchors();
         initCurrentMonth();
     };
