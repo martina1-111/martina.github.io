@@ -344,10 +344,13 @@ document.addEventListener("DOMContentLoaded", () => {
     init();
 });
 
-// ---------- Splash (Highlights marquee) ----------
+// ---------- Splash (one-time, full overlay, auto fade) ----------
 document.addEventListener("DOMContentLoaded", () => {
     const splash = document.getElementById("splash");
     if (!splash) return;
+
+    const seen = localStorage.getItem("splashSeen") === "true";
+    if (seen) return;
 
     const slides = [
         { title: "ソフトバンク様3D映像制作", desc: "展示向け3Dコンテンツ", img: "CG/cg-softbank-20241208.webp" },
@@ -356,13 +359,14 @@ document.addEventListener("DOMContentLoaded", () => {
         { title: "ガーリーなお部屋", desc: "インテリアCG", img: "CG/cg-girly-room-01.webp" },
         { title: "Articles", desc: "noteで執筆", img: "assets/articles-note.webp" },
         { title: "WEB制作", desc: "株式会社スムージースタジオ", img: "assets/web-smoothie.webp" },
-        { title: "the Chosen Ones", desc: "キャラクタービジュアル", img: "CG/『the Chosen Ones』01.webp" }
+        { title: "the Chosen Ones", desc: "キャラクタービジュアル", img: "CG/『the Chosen Ones』01.webp" },
+        { title: "経産省コンテスト", desc: "「逆に普通が良い賞」受賞", img: "assets/articles-kikagaku.webp" }
     ];
 
-    const track = splash.querySelector(".splash-track");
-    slides.concat(slides).forEach(item => {
+    const grid = splash.querySelector(".splash-grid");
+    slides.forEach(item => {
         const cell = document.createElement("div");
-        cell.className = "splash-item";
+        cell.className = "splash-card";
         cell.innerHTML = `
             <div class="splash-thumb" style="background-image:url('${item.img}')"></div>
             <div class="splash-meta">
@@ -370,13 +374,20 @@ document.addEventListener("DOMContentLoaded", () => {
                 <p class="splash-item-desc">${item.desc}</p>
             </div>
         `;
-        track.appendChild(cell);
+        grid.appendChild(cell);
     });
 
-    const close = () => splash.classList.add("hidden");
-
-    splash.querySelector(".splash-close").addEventListener("click", close);
-    splash.addEventListener("click", e => { if (e.target === splash) close(); });
-
+    // show overlay
     splash.classList.remove("hidden");
+    document.body.style.overflow = "hidden";
+
+    // auto fade after 3s
+    setTimeout(() => {
+        splash.classList.add("fade-out");
+        setTimeout(() => {
+            splash.classList.add("hidden");
+            document.body.style.overflow = "";
+            localStorage.setItem("splashSeen", "true");
+        }, 600);
+    }, 3000);
 });

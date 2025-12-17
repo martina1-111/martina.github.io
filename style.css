@@ -1251,64 +1251,42 @@ body.dark-page {
 .splash {
     position: fixed;
     inset: 0;
-    background: rgba(0,0,0,0.4);
+    background: #f6f6f6;
     z-index: 2000;
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 20px;
+    transition: opacity 0.6s ease;
 }
 
 .splash.hidden {
     display: none;
 }
 
+.splash.fade-out {
+    opacity: 0;
+    pointer-events: none;
+}
+
 .splash-content {
-    background: #fff;
-    border: 2px solid #111;
-    border-radius: 16px;
-    padding: 16px;
-    width: min(900px, 96vw);
-    box-shadow: 16px 16px 0 #111;
+    width: min(1100px, 96vw);
     display: flex;
     flex-direction: column;
+    gap: 14px;
+}
+
+.splash-head h3 {
+    margin: 4px 0;
+}
+
+.splash-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 12px;
 }
 
-.splash-close {
-    margin-left: auto;
-    background: transparent;
-    border: none;
-    font-size: 1.2rem;
-    cursor: pointer;
-}
-
-.splash-top {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.splash-window {
-    overflow: hidden;
-    border-radius: 12px;
-    border: 1px solid var(--border);
-}
-
-.splash-track {
-    display: flex;
-    gap: 12px;
-    padding: 10px;
-    animation: marquee 18s linear infinite;
-}
-
-.splash-track:hover {
-    animation-play-state: paused;
-}
-
-.splash-item {
-    min-width: 220px;
-    max-width: 220px;
+.splash-card {
     background: #fff;
     border: 1px solid var(--border);
     border-radius: 12px;
@@ -1335,16 +1313,6 @@ body.dark-page {
     color: var(--text-sub);
     font-family: var(--font-jp);
     font-size: 0.9rem;
-}
-
-.splash-actions {
-    display: flex;
-    justify-content: flex-end;
-}
-
-@keyframes marquee {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-50%); }
 }
 
 @media (max-width: 900px) {
