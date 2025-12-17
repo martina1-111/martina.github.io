@@ -508,10 +508,10 @@ body.dark-page {
 .gallery-card img {
     width: 100%;
     height: 260px;
-    object-fit: contain;
+    object-fit: cover;
     display: block;
     background: #f8f8f8;
-    padding: 8px;
+    padding: 0;
 }
 
 .image-slider {
@@ -1316,7 +1316,7 @@ body.dark-page {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 12px;
-    animation: flowY 6s linear infinite;
+    animation: flowY 8s linear infinite alternate;
 }
 
 .splash-card {
@@ -1349,9 +1349,8 @@ body.dark-page {
 }
 
 @keyframes flowY {
-    0% { transform: translateY(-18px); }
-    50% { transform: translateY(18px); }
-    100% { transform: translateY(-18px); }
+    0% { transform: translateY(-15%); }
+    100% { transform: translateY(15%); }
 }
 
 @media (max-width: 900px) {
