@@ -327,8 +327,9 @@ document.addEventListener("DOMContentLoaded", () => {
         applyReveal();
         const videoData = await loadVideos();
 
-        document.querySelectorAll('[data-carousel="movie"]').forEach(carousel => {
-            const vids = videoData.filter(v => v.category === "video");
+        document.querySelectorAll("[data-carousel]").forEach(carousel => {
+            const cat = carousel.dataset.carousel;
+            const vids = videoData.filter(v => v.category === cat);
             buildCarousel(carousel, vids);
         });
 

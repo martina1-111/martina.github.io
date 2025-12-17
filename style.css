@@ -125,13 +125,15 @@ body.dark-page {
     justify-content: center;
     width: 28px;
     height: 28px;
-    border: 1px solid #111;
     border-radius: 50%;
-    font-size: 0.8rem;
-    font-weight: 700;
     background: #fff;
-    color: #111;
     text-decoration: none;
+}
+
+.social-icon img {
+    width: 18px;
+    height: 18px;
+    display: block;
 }
 
 .site-header nav li {
@@ -1314,6 +1316,7 @@ body.dark-page {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 12px;
+    animation: flowY 6s linear infinite;
 }
 
 .splash-card {
@@ -1343,6 +1346,12 @@ body.dark-page {
     color: var(--text-sub);
     font-family: var(--font-jp);
     font-size: 0.9rem;
+}
+
+@keyframes flowY {
+    0% { transform: translateY(-18px); }
+    50% { transform: translateY(18px); }
+    100% { transform: translateY(-18px); }
 }
 
 @media (max-width: 900px) {
