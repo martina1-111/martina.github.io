@@ -246,44 +246,7 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     // ---------- Contact form ----------
-    const CONTACT_HISTORY_KEY = "contactHistory";
-    const CONTACT_COUNTER_KEY = "contactCounter";
-
-    const loadContactHistory = () => {
-        try {
-            const parsed = JSON.parse(localStorage.getItem(CONTACT_HISTORY_KEY) || "[]");
-            return Array.isArray(parsed) ? parsed : [];
-        } catch {
-            return [];
-        }
-    };
-
-    const saveContactHistory = history => {
-        localStorage.setItem(CONTACT_HISTORY_KEY, JSON.stringify(history.slice(0, 50)));
-    };
-
-    const renderContactHistory = () => {
-        const list = document.querySelector("[data-contact-history]");
-        if (!list) return;
-        const history = loadContactHistory();
-        if (!history.length) {
-            list.innerHTML = '<p class="hint">まだ履歴はありません。</p>';
-            return;
-        }
-        list.innerHTML = "";
-        history.forEach(item => {
-            const entry = document.createElement("div");
-            entry.className = "history-entry";
-            entry.innerHTML = `
-                <div>
-                    <p class="history-title">#${item.id} ${item.name || "お名前未入力"}</p>
-                    <p class="history-meta">${item.date || ""}</p>
-                </div>
-                <p class="history-desc">${item.message || ""}</p>
-            `;
-            list.appendChild(entry);
-        });
-    };
+    let contactCounter = 0;
 
     const bindContactForm = () => {
         const form = document.getElementById("contact-form");
@@ -304,35 +267,18 @@ document.addEventListener("DOMContentLoaded", () => {
                 return;
             }
 
-            const counter = Number(localStorage.getItem(CONTACT_COUNTER_KEY) || "0") + 1;
-            localStorage.setItem(CONTACT_COUNTER_KEY, String(counter));
-
-            const entry = {
-                id: counter,
-                name,
-                furigana,
-                company,
-                email,
-                phone,
-                message,
-                date: new Date().toLocaleString()
-            };
-
-            const history = loadContactHistory();
-            history.unshift(entry);
-            saveContactHistory(history);
-
-            const subject = encodeURIComponent(`サイトからの問い合わせ#${counter}`);
+            contactCounter += 1;
+            const subject = encodeURIComponent(`サイトからの問い合わせ#${contactCounter}`);
             const body = encodeURIComponent(
                 `お名前: ${name}\nふりがな: ${furigana || ""}\n会社名: ${company || ""}\nメール: ${email}\n電話番号: ${phone || ""}\nお問い合わせ内容:\n${message}`
             );
             window.location.href = `mailto:m.kawaguchi68@gmail.com?subject=${subject}&body=${body}`;
 
-            form.reset();
-            renderContactHistory();
-        });
+            // TODO: Google Sheets連携を追加する場合はここに送信処理を実装
 
-        renderContactHistory();
+            form.reset();
+            window.location.href = "thanks.html";
+        });
     };
 
     const initAnchors = () => {

@@ -1231,6 +1231,23 @@ body.dark-page {
     white-space: pre-wrap;
 }
 
+.personal-grid .gallery-card {
+    display: flex;
+    flex-direction: column;
+}
+
+.placeholder-img {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border: 1.5px dashed var(--border);
+    border-radius: 12px;
+    display: grid;
+    place-items: center;
+    color: var(--text-sub);
+    background: rgba(0,0,0,0.02);
+    font-family: var(--font-jp);
+}
+
 @media (max-width: 900px) {
     .contact-layout {
         grid-template-columns: 1fr;
