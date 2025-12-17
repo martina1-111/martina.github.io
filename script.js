@@ -284,16 +284,15 @@ document.addEventListener("DOMContentLoaded", () => {
                 if (!SHEETS_ENDPOINT) {
                     throw new Error("送信先エンドポイントが未設定です。window.CONTACT_ENDPOINT にURLをセットしてください。");
                 }
-                const res = await fetch(SHEETS_ENDPOINT, {
+                await fetch(SHEETS_ENDPOINT, {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify(payload)
+                    body: JSON.stringify(payload),
+                    mode: "no-cors"
                 });
-                if (!res.ok) throw new Error(`送信に失敗しました (${res.status})`);
             } catch (err) {
                 console.error(err);
-                alert("サーバーへの送信ができませんでした。スプレッドシート連携のURLを設定してください。");
-                return;
+                // エンドポイントエラー時もThanksへ進める
             }
 
             form.reset();
