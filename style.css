@@ -85,6 +85,7 @@ body.dark-page {
     align-items: center;
     justify-content: space-between;
     padding: 8px 0;
+    gap: 12px;
 }
 
 .logo {
@@ -103,6 +104,34 @@ body.dark-page {
     display: flex;
     gap: 18px;
     font-size: 0.92rem;
+    align-items: center;
+}
+
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.social-links {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.social-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border: 1px solid #111;
+    border-radius: 50%;
+    font-size: 0.8rem;
+    font-weight: 700;
+    background: #fff;
+    color: #111;
+    text-decoration: none;
 }
 
 .site-header nav li {
@@ -543,6 +572,7 @@ body.dark-page {
     flex-direction: column;
     gap: 12px;
     position: relative;
+    min-height: 240px;
 }
 
 .carousel-window {

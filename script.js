@@ -352,7 +352,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const splash = document.getElementById("splash");
     if (!splash) return;
 
-    const seen = localStorage.getItem("splashSeen") === "true";
+    const SPLASH_KEY = "splashSeenV2";
+    const seen = localStorage.getItem(SPLASH_KEY) === "true";
     if (seen) return;
 
     const slides = [
@@ -390,7 +391,7 @@ document.addEventListener("DOMContentLoaded", () => {
         setTimeout(() => {
             splash.classList.add("hidden");
             document.body.style.overflow = "";
-            localStorage.setItem("splashSeen", "true");
+            localStorage.setItem(SPLASH_KEY, "true");
         }, 600);
     }, 3000);
 });
