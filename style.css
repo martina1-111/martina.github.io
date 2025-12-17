@@ -1248,6 +1248,57 @@ body.dark-page {
     font-family: var(--font-jp);
 }
 
+.splash {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.4);
+    display: grid;
+    place-items: center;
+    z-index: 2000;
+}
+
+.splash.hidden {
+    display: none;
+}
+
+.splash-card {
+    background: #fff;
+    border: 2px solid #111;
+    border-radius: 16px;
+    padding: 20px;
+    width: min(360px, 90vw);
+    position: relative;
+    box-shadow: 16px 16px 0 #111;
+}
+
+.splash-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: transparent;
+    border: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+
+.splash-tag {
+    display: inline-block;
+    padding: 6px 10px;
+    border-radius: 12px;
+    background: rgba(231, 171, 240, 0.2);
+    color: #7f2e9b;
+    font-weight: 700;
+}
+
+.splash-title {
+    margin: 10px 0 4px;
+}
+
+.splash-desc {
+    color: var(--text-sub);
+    font-family: var(--font-jp);
+}
+
 @media (max-width: 900px) {
     .contact-layout {
         grid-template-columns: 1fr;

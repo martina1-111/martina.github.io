@@ -1,4 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
+    // エンドポイントは window.CONTACT_ENDPOINT にセットするか、下記を直接書き換えてください
+    const SHEETS_ENDPOINT = window.CONTACT_ENDPOINT || "";
     // ---------- 基本設定 ----------
     const defaultVideos = [
         // Movie
@@ -250,7 +252,6 @@ document.addEventListener("DOMContentLoaded", () => {
         const form = document.getElementById("contact-form");
         if (!form) return;
 
-        const SHEETS_ENDPOINT = ""; // ここにGoogle Apps ScriptなどのエンドポイントURLを設定してください
         let counter = 0;
 
         form.addEventListener("submit", async event => {
@@ -281,16 +282,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
             try {
                 if (!SHEETS_ENDPOINT) {
-                    throw new Error("送信先エンドポイントが未設定です");
+                    throw new Error("送信先エンドポイントが未設定です。window.CONTACT_ENDPOINT にURLをセットしてください。");
                 }
-                await fetch(SHEETS_ENDPOINT, {
+                const res = await fetch(SHEETS_ENDPOINT, {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify(payload)
                 });
+                if (!res.ok) throw new Error(`送信に失敗しました (${res.status})`);
             } catch (err) {
                 console.error(err);
-                alert("サーバーへの送信ができませんでした。エンドポイント設定が必要です。");
+                alert("サーバーへの送信ができませんでした。スプレッドシート連携のURLを設定してください。");
+                return;
             }
 
             form.reset();
@@ -340,4 +343,46 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     init();
+});
+
+// ---------- Splash (Highights) ----------
+document.addEventListener("DOMContentLoaded", () => {
+    const splash = document.getElementById("splash");
+    if (!splash) return;
+
+    const slides = [
+        { title: "映像インタビュー", desc: "進研ゼミ 学び方コンテンツ出演", tag: "Movie" },
+        { title: "キッズワークショップ2022", desc: "メタバースイベントスタッフ", tag: "Event" },
+        { title: "ソフトバンク様3D映像制作", desc: "展示向け3Dコンテンツ制作", tag: "3DCG" },
+        { title: "新しい働き方AWARD 登壇", desc: "クロストーク登壇/受賞", tag: "Talk" }
+    ];
+
+    const titleEl = splash.querySelector(".splash-title");
+    const descEl = splash.querySelector(".splash-desc");
+    const tagEl = splash.querySelector(".splash-tag");
+    let idx = 0;
+
+    const render = () => {
+        const s = slides[idx];
+        titleEl.textContent = s.title;
+        descEl.textContent = s.desc;
+        tagEl.textContent = s.tag;
+    };
+
+    const next = () => {
+        idx = (idx + 1) % slides.length;
+        render();
+    };
+
+    const close = () => splash.classList.add("hidden");
+
+    splash.querySelector(".splash-close").addEventListener("click", close);
+    splash.addEventListener("click", e => {
+        if (e.target === splash) close();
+    });
+
+    render();
+    splash.classList.remove("hidden");
+    const timer = setInterval(next, 2000);
+    splash.addEventListener("mouseenter", () => clearInterval(timer));
 });
