@@ -166,6 +166,88 @@ document.addEventListener("DOMContentLoaded", () => {
         restart();
     };
 
+    // 汎用カードカルーセル（画像3枚表示など）
+    const buildCardCarousel = (carousel, items) => {
+        if (!carousel || !items.length) return;
+        const perView = Number(carousel.dataset.show || 1);
+
+        const track = document.createElement("div");
+        track.className = "carousel-track";
+        const dots = document.createElement("div");
+        dots.className = "carousel-dots";
+        const controls = document.createElement("div");
+        controls.className = "carousel-controls";
+        const windowEl = document.createElement("div");
+        windowEl.className = "carousel-window";
+        windowEl.appendChild(track);
+
+        carousel.innerHTML = "";
+        carousel.appendChild(windowEl);
+        carousel.appendChild(controls);
+        controls.appendChild(dots);
+
+        items.forEach((item, idx) => {
+            const slide = document.createElement("div");
+            slide.className = "carousel-slide";
+            slide.style.flex = `0 0 ${100 / perView}%`;
+
+            slide.innerHTML = `
+                <a class="card-link" href="${item.link || "#"}" target="_blank" rel="noopener">
+                    <div class="card-thumb" style="background-image:url('${item.img}')"></div>
+                    <div class="card-body">
+                        <p class="card-tag">${item.tag || ""}</p>
+                        <h4>${item.title || ""}</h4>
+                        <p class="card-desc">${item.desc || ""}</p>
+                    </div>
+                </a>
+            `;
+            track.appendChild(slide);
+
+            const dot = document.createElement("button");
+            dot.type = "button";
+            dot.className = "carousel-dot";
+            dot.setAttribute("aria-label", `${item.title} を表示`);
+            dot.addEventListener("click", () => {
+                goTo(idx);
+                restart();
+            });
+            dots.appendChild(dot);
+        });
+
+        const total = items.length;
+        let index = 0;
+        let timer;
+
+        const goTo = i => {
+            index = (i + total) % total;
+            track.style.transform = `translateX(-${(index * 100) / perView}%)`;
+            dots.querySelectorAll(".carousel-dot").forEach((dot, dotIndex) => {
+                dot.classList.toggle("active", dotIndex === index);
+            });
+        };
+
+        const stop = () => { if (timer) clearInterval(timer); };
+        const restart = () => {
+            stop();
+            timer = setInterval(() => goTo(index + 1), 3000);
+        };
+
+        carousel.addEventListener("mouseenter", stop);
+        carousel.addEventListener("mouseleave", restart);
+
+        goTo(0);
+        restart();
+    };
+
+    const highlightItems = [
+        { title: "インタビュー掲載", desc: "働き方・制作に関するインタビュー", img: "assets/others/interview.webp", tag: "Others", link: "#" },
+        { title: "登壇", desc: "新しい働き方AWARDで登壇・発表", img: "assets/others/stage.jpg", tag: "Others", link: "#" },
+        { title: "青山学院大学HP掲載", desc: "研究ラボ成果の掲載記事", img: "assets/others/aogaku.jpg", tag: "Others", link: "#" },
+        { title: "パンフレット制作 03", desc: "パンフレットデザイン", img: "graphics/g-pamphlet-03.webp", tag: "Graphics", link: "graphics.html" },
+        { title: "パンフレット制作 04", desc: "パンフレットデザイン", img: "graphics/g-pamphlet-04.webp", tag: "Graphics", link: "graphics.html" },
+        { title: "パンフレット制作 05", desc: "パンフレットデザイン", img: "graphics/g-pamphlet-05.webp", tag: "Graphics", link: "graphics.html" }
+    ];
+
     const renderList = (container, category, videoData) => {
         const list = videoData.filter(v => v.category === category);
         container.innerHTML = "";
@@ -338,8 +420,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
         document.querySelectorAll("[data-carousel]").forEach(carousel => {
             const cat = carousel.dataset.carousel;
-            const vids = videoData.filter(v => v.category === cat);
-            buildCarousel(carousel, vids);
+            if (cat === "highlight") {
+                buildCardCarousel(carousel, highlightItems);
+            } else {
+                const vids = videoData.filter(v => v.category === cat);
+                buildCarousel(carousel, vids);
+            }
         });
 
         document.querySelectorAll("[data-list]").forEach(container => {

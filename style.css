@@ -659,6 +659,43 @@ body.dark-page {
     transform: translateY(-1px);
 }
 
+.card-link {
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    background: #fff;
+    border: 1.5px solid #111;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.card-thumb {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background-size: cover;
+    background-position: center;
+}
+
+.card-body {
+    padding: 10px 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.card-tag {
+    font-size: 0.85rem;
+    color: var(--text-sub);
+}
+
+.card-desc {
+    color: var(--text-sub);
+    font-family: var(--font-jp);
+    font-size: 0.95rem;
+}
+
 .comment-modal {
     position: fixed;
     inset: 0;
