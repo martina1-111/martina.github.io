@@ -203,21 +203,24 @@ document.addEventListener("DOMContentLoaded", () => {
             `;
             track.appendChild(slide);
 
-            const dot = document.createElement("button");
-            dot.type = "button";
-            dot.className = "carousel-dot";
-            dot.setAttribute("aria-label", `${item.title} を表示`);
-            dot.addEventListener("click", () => {
-                goTo(idx);
-                restart();
-            });
-            dots.appendChild(dot);
         });
 
         const total = items.length;
         const maxIndex = Math.max(0, total - perView);
         let index = 0;
         let timer;
+
+        for (let d = 0; d <= maxIndex; d++) {
+            const dot = document.createElement("button");
+            dot.type = "button";
+            dot.className = "carousel-dot";
+            dot.setAttribute("aria-label", `スライド${d + 1} を表示`);
+            dot.addEventListener("click", () => {
+                goTo(d);
+                restart();
+            });
+            dots.appendChild(dot);
+        }
 
         const goTo = i => {
             const next = (i + total) % total;
