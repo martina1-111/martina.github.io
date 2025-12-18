@@ -1,113 +1,237 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact | Marina Kawaguchi</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact | Marina Kawaguchi</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="background-glow"></div>
+  <div class="background-glow"></div>
 
-    <header class="site-header">
-        <div class="container nav-layout">
-            <a class="logo" href="index.html">
-                <img src="assets/martina_logo.png" alt="Marina Kawaguchi logo">
-            </a>
-            <nav>
-                <ul>
-                    <li><a href="index.html">Top</a></li>
-                    <li><a href="about.html">About</a></li>
-                    <li class="has-dropdown">
-                        <a href="works.html">Works</a>
-                        <ul class="nav-dropdown">
-                            <li><a href="cg.html">CG</a></li>
-                            <li><a href="video.html">Video</a></li>
-                            <li><a href="graphics.html">Graphics</a></li>
-                            <li><a href="web.html">WEB</a></li>
-                            <li><a href="articles.html">Articles</a></li>
-                            <li><a href="others.html">Others</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </nav>
-            <div class="header-actions">
-                <div class="social-links">
-                    <a href="https://x.com/martina1_111" aria-label="X" target="_blank" rel="noopener" class="social-icon"><img src="SNSLogo/x.png" alt="X"></a>
-                    <a href="https://www.instagram.com/martina1_111/" aria-label="Instagram" target="_blank" rel="noopener" class="social-icon"><img src="SNSLogo/instagram.png" alt="Instagram"></a>
-                    <a href="https://www.facebook.com/marinakawaguchi11" aria-label="Facebook" target="_blank" rel="noopener" class="social-icon"><img src="SNSLogo/facebook.png" alt="Facebook"></a>
-                </div>
-                <a class="btn ghost small active" href="contact.html">Contact</a>
-            </div>
+  <header class="site-header">
+    <div class="container nav-layout">
+      <a class="logo" href="index.html">
+        <img src="assets/martina_logo.png" alt="Marina Kawaguchi logo">
+      </a>
+      <nav>
+        <ul>
+          <li><a href="index.html">Top</a></li>
+          <li><a href="about.html">About</a></li>
+          <li class="has-dropdown">
+            <a href="cg.html">Works</a>
+            <ul class="nav-dropdown">
+              <li><a href="cg.html">CG</a></li>
+              <li><a href="video.html">Video</a></li>
+              <li><a href="graphics.html">Graphics</a></li>
+              <li><a href="web.html">WEB</a></li>
+              <li><a href="articles.html">Articles</a></li>
+              <li><a href="others.html">Others</a></li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <div class="header-actions">
+        <div class="social-links">
+          <a href="https://x.com/martina1_111" aria-label="X" target="_blank" rel="noopener" class="social-icon"><img src="SNSLogo/x.png" alt="X"></a>
+          <a href="https://www.instagram.com/martina1_111/" aria-label="Instagram" target="_blank" rel="noopener" class="social-icon"><img src="SNSLogo/instagram.png" alt="Instagram"></a>
+          <a href="https://www.facebook.com/marinakawaguchi11" aria-label="Facebook" target="_blank" rel="noopener" class="social-icon"><img src="SNSLogo/facebook.png" alt="Facebook"></a>
         </div>
-    </header>
+        <a class="btn ghost small active" href="contact.html">Contact</a>
+      </div>
+    </div>
+  </header>
 
-    <main>
-        <section class="hero hero-page">
-            <div class="container hero-grid">
-                <div class="hero-copy reveal">
-                    <p class="eyebrow">Contact</p>
-                    <h1>お問い合わせフォーム</h1>
-                    <p class="lede">下記フォームにご記入いただくと、自動でメールが立ち上がります。記録はブラウザに保存されます。</p>
-                    <div class="chip-row">
-                        <span class="chip">サイトからの問い合わせ</span>
-                        <span class="chip ghost">自動で件名に番号付与</span>
-                        <span class="chip ghost">ローカル履歴保存</span>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="section contact-form-section">
-            <div class="container contact-layout">
-                <form id="contact-form" class="contact-card reveal">
-                    <div class="form-row">
-                        <label for="name">お名前<span class="req">*</span></label>
-                        <input id="name" name="name" type="text" required placeholder="山田 太郎">
-                    </div>
-                    <div class="form-row">
-                        <label for="furigana">ふりがな</label>
-                        <input id="furigana" name="furigana" type="text" placeholder="やまだ たろう">
-                    </div>
-                    <div class="form-row">
-                        <label for="company">会社名</label>
-                        <input id="company" name="company" type="text" placeholder="株式会社 ○○">
-                    </div>
-                    <div class="form-row">
-                        <label for="email">メールアドレス<span class="req">*</span></label>
-                        <input id="email" name="email" type="email" required placeholder="m.kawaguchi68@gmail.com">
-                    </div>
-                    <div class="form-row">
-                        <label for="phone">電話番号</label>
-                        <input id="phone" name="phone" type="tel" placeholder="090-1234-5678">
-                    </div>
-                    <div class="form-row">
-                        <label for="message">お問い合わせ内容<span class="req">*</span></label>
-                        <textarea id="message" name="message" rows="4" required placeholder="ご相談内容をご記入ください。"></textarea>
-                    </div>
-                    <div class="form-actions">
-                        <button type="submit" class="btn primary">送信</button>
-                        <p class="hint">原則3日以内に返信いたします。</p>
-                    </div>
-                </form>
-
-            </div>
-        </section>
-    </main>
-
-    <footer class="site-footer">
-        <div class="container footer-content">
-            <span>© Marina Kawaguchi</span>
+  <main>
+    <section class="hero hero-page">
+      <div class="container hero-grid">
+        <div class="hero-copy reveal">
+          <p class="eyebrow">Contact</p>
+          <h1>お問い合わせフォーム</h1>
+          <p class="lede">送信するとスプレッドシートへ記録され、あなた宛に通知メールが届きます。送信履歴はブラウザにも保存されます。</p>
+          <div class="chip-row">
+            <span class="chip">サイトからの問い合わせ</span>
+            <span class="chip ghost">自動で件名に番号付与</span>
+            <span class="chip ghost">ローカル履歴保存</span>
+          </div>
         </div>
-    </footer>
+      </div>
+    </section>
 
-    <script>
-        // Google Apps Script エンドポイント（スプシ連携先）
-        window.CONTACT_ENDPOINT = "https://script.google.com/macros/s/AKfycbxZ2rU7QfpG6fHdnflt1NkWbiNRhwu2gytz2uT0xM2qqFgpYRxt0teF08bLmNgtHYbs/exec";
-    </script>
-    <script src="script.js"></script>
+    <section class="section contact-form-section">
+      <div class="container contact-layout">
+
+        <!-- 送信用（CORS回避） -->
+        <iframe name="contact_sink" id="contact_sink" style="display:none;"></iframe>
+
+        <form id="contact-form" class="contact-card reveal"
+              method="POST" target="contact_sink"
+              accept-charset="UTF-8"
+              enctype="application/x-www-form-urlencoded">
+
+          <!-- GASへ渡す隠し項目 -->
+          <input type="hidden" id="subject" name="subject" value="">
+          <input type="hidden" id="requestId" name="requestId" value="">
+          <input type="hidden" id="pageUrl" name="pageUrl" value="">
+          <input type="hidden" id="userAgent" name="userAgent" value="">
+
+          <!-- スパム対策：人間は触らない -->
+          <div style="position:absolute; left:-9999px; width:1px; height:1px; overflow:hidden;">
+            <label>Website <input type="text" name="website" tabindex="-1" autocomplete="off"></label>
+          </div>
+
+          <div class="form-row">
+            <label for="name">お名前<span class="req">*</span></label>
+            <input id="name" name="name" type="text" required placeholder="山田 太郎">
+          </div>
+
+          <div class="form-row">
+            <label for="furigana">ふりがな</label>
+            <input id="furigana" name="furigana" type="text" placeholder="やまだ たろう">
+          </div>
+
+          <div class="form-row">
+            <label for="company">会社名</label>
+            <input id="company" name="company" type="text" placeholder="株式会社 ○○">
+          </div>
+
+          <div class="form-row">
+            <label for="email">メールアドレス<span class="req">*</span></label>
+            <input id="email" name="email" type="email" required placeholder="example@gmail.com">
+          </div>
+
+          <div class="form-row">
+            <label for="phone">電話番号</label>
+            <input id="phone" name="phone" type="tel" placeholder="090-1234-5678">
+          </div>
+
+          <div class="form-row">
+            <label for="message">お問い合わせ内容<span class="req">*</span></label>
+            <textarea id="message" name="message" rows="4" required placeholder="ご相談内容をご記入ください。"></textarea>
+          </div>
+
+          <div class="form-actions">
+            <button type="submit" class="btn primary" id="submitBtn">送信</button>
+            <p class="hint" id="hintText">送信後、2〜3秒ほどで記録されます。</p>
+          </div>
+
+          <div id="statusBox" style="margin-top:14px;"></div>
+
+          <div style="margin-top:18px;">
+            <h3 style="margin:0 0 8px 0;">送信履歴（このブラウザ）</h3>
+            <ul id="historyList" style="margin:0; padding-left:18px;"></ul>
+          </div>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-content">
+      <span>© Marina Kawaguchi</span>
+    </div>
+  </footer>
+
+  <script>
+    // Google Apps Script エンドポイント（あなたのWebアプリURL）
+    window.CONTACT_ENDPOINT = "https://script.google.com/macros/s/AKfycbxZ2rU7QfpG6fHdnflt1NkWbiNRhwu2gytz2uT0xM2qqFgpYRxt0teF08bLmNgtHYbs/exec";
+  </script>
+
+  <!-- 既存のサイト用JS（アニメーション等） -->
+  <script src="script.js"></script>
+
+  <!-- Contact専用：確実に送る -->
+  <script>
+    (function () {
+      const form = document.getElementById("contact-form");
+      const sink = document.getElementById("contact_sink");
+      const statusBox = document.getElementById("statusBox");
+      const submitBtn = document.getElementById("submitBtn");
+      const historyList = document.getElementById("historyList");
+
+      // action をセット（HTMLに直書きしなくてOKにする）
+      form.action = window.CONTACT_ENDPOINT;
+
+      // 初期値
+      document.getElementById("pageUrl").value = location.href;
+      document.getElementById("userAgent").value = navigator.userAgent;
+
+      function pad(n){ return String(n).padStart(2,"0"); }
+      function makeRequestId() {
+        const d = new Date();
+        const id = `${d.getFullYear()}${pad(d.getMonth()+1)}${pad(d.getDate())}-${pad(d.getHours())}${pad(d.getMinutes())}${pad(d.getSeconds())}`;
+        const rnd = Math.random().toString(36).slice(2,7).toUpperCase();
+        return `MK-${id}-${rnd}`;
+      }
+
+      function setStatus(html) {
+        statusBox.innerHTML = html;
+      }
+
+      function loadHistory() {
+        const key = "contactHistory_v1";
+        const arr = JSON.parse(localStorage.getItem(key) || "[]");
+        historyList.innerHTML = "";
+        arr.slice(-8).reverse().forEach(item => {
+          const li = document.createElement("li");
+          li.textContent = `${item.at} / ${item.requestId} / ${item.name} / ${item.email}`;
+          historyList.appendChild(li);
+        });
+      }
+
+      function saveHistory(entry) {
+        const key = "contactHistory_v1";
+        const arr = JSON.parse(localStorage.getItem(key) || "[]");
+        arr.push(entry);
+        localStorage.setItem(key, JSON.stringify(arr));
+        loadHistory();
+      }
+
+      loadHistory();
+
+      let submitted = false;
+
+      // 送信完了検知（iframeが読み込まれたらOK扱い）
+      sink.addEventListener("load", () => {
+        if (!submitted) return;
+        submitted = false;
+        submitBtn.disabled = false;
+
+        setStatus(`
+          <div class="chip" style="display:inline-block;">送信完了 ✅</div>
+          <p style="margin-top:8px;">スプレッドシートに記録し、通知メールを送信しました。</p>
+        `);
+
+        form.reset();
+      });
+
+      // ここが肝：他のsubmitハンドラが邪魔しても止める（capture=true）
+      form.addEventListener("submit", (ev) => {
+        ev.stopImmediatePropagation(); // ← script.js 側の preventDefault を封じる
+
+        const requestId = makeRequestId();
+        document.getElementById("requestId").value = requestId;
+        document.getElementById("subject").value = `サイトお問い合わせ ${requestId}`;
+
+        // 送信中表示
+        submitted = true;
+        submitBtn.disabled = true;
+        setStatus(`<div class="chip ghost" style="display:inline-block;">送信中… ⏳</div>`);
+
+        // ローカル履歴保存
+        saveHistory({
+          at: new Date().toLocaleString(),
+          requestId,
+          name: document.getElementById("name").value || "",
+          email: document.getElementById("email").value || ""
+        });
+
+        // ここで preventDefault しない！→ form がそのままPOSTされる
+      }, true);
+    })();
+  </script>
 </body>
 </html>
