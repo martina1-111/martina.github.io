@@ -761,8 +761,10 @@ body.dark-page {
 .card-thumb {
     width: 100%;
     aspect-ratio: 16 / 9;
-    background-size: cover;
+    background-size: contain;
+    background-repeat: no-repeat;
     background-position: center;
+    background-color: #f6f6f6;
 }
 
 .card-body {

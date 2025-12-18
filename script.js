@@ -215,11 +215,13 @@ document.addEventListener("DOMContentLoaded", () => {
         });
 
         const total = items.length;
+        const maxIndex = Math.max(0, total - perView);
         let index = 0;
         let timer;
 
         const goTo = i => {
-            index = (i + total) % total;
+            const next = (i + total) % total;
+            index = next > maxIndex ? 0 : next;
             track.style.transform = `translateX(-${(index * 100) / perView}%)`;
             dots.querySelectorAll(".carousel-dot").forEach((dot, dotIndex) => {
                 dot.classList.toggle("active", dotIndex === index);
@@ -240,12 +242,16 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     const highlightItems = [
-        { title: "インタビュー掲載", desc: "働き方・制作に関するインタビュー", img: "assets/others/interview.webp", tag: "Others", link: "#" },
-        { title: "登壇", desc: "新しい働き方AWARDで登壇・発表", img: "assets/others/stage.jpg", tag: "Others", link: "#" },
-        { title: "青山学院大学HP掲載", desc: "研究ラボ成果の掲載記事", img: "assets/others/aogaku.jpg", tag: "Others", link: "#" },
+        { title: "インタビュー掲載", desc: "働き方・制作に関するインタビュー", img: "assets/others/interview.webp", tag: "Others", link: "others.html" },
+        { title: "登壇", desc: "新しい働き方AWARDで登壇・発表", img: "assets/others/stage.jpg", tag: "Others", link: "others.html" },
+        { title: "青山学院大学HP掲載", desc: "研究ラボ成果の掲載記事", img: "assets/others/aogaku.jpg", tag: "Others", link: "others.html" },
+        { title: "ソフトバンク生成AIコンテスト", desc: "アイデア提案", img: "assets/others/softbank-ai.png", tag: "Others", link: "others.html" },
+        { title: "スポーツ庁コンペ 優秀賞", desc: "健康まちづくりデザインコンペ2025", img: "assets/others/award-digital-hollywood.png", tag: "Others", link: "others.html" },
         { title: "パンフレット制作 03", desc: "パンフレットデザイン", img: "graphics/g-pamphlet-03.webp", tag: "Graphics", link: "graphics.html" },
         { title: "パンフレット制作 04", desc: "パンフレットデザイン", img: "graphics/g-pamphlet-04.webp", tag: "Graphics", link: "graphics.html" },
-        { title: "パンフレット制作 05", desc: "パンフレットデザイン", img: "graphics/g-pamphlet-05.webp", tag: "Graphics", link: "graphics.html" }
+        { title: "パンフレット制作 05", desc: "パンフレットデザイン", img: "graphics/g-pamphlet-05.webp", tag: "Graphics", link: "graphics.html" },
+        { title: "MESSAGE展 出展", desc: "展示作品", img: "graphics/MESSAGE展.webp", tag: "Graphics", link: "graphics.html" },
+        { title: "NaTure", desc: "点描イラスト", img: "graphics/NaTure.webp", tag: "Graphics", link: "graphics.html" }
     ];
 
     const renderList = (container, category, videoData) => {
