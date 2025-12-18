@@ -193,7 +193,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
             slide.innerHTML = `
                 <a class="card-link" href="${item.link || "#"}" target="_blank" rel="noopener">
-                    <div class="card-thumb" style="background-image:url('${item.img}')"></div>
+                    <div class="card-thumb">
+                        <img class="card-thumb-img" src="${item.img}" alt="${item.title || "thumbnail"}">
+                    </div>
                     <div class="card-body">
                         <p class="card-tag">${item.tag || ""}</p>
                         <h4>${item.title || ""}</h4>
