@@ -284,18 +284,16 @@ document.addEventListener("DOMContentLoaded", () => {
                 if (!SHEETS_ENDPOINT) {
                     throw new Error("送信先エンドポイントが未設定です。window.CONTACT_ENDPOINT にURLをセットしてください。");
                 }
-                const res = await fetch(SHEETS_ENDPOINT, {
+                await fetch(SHEETS_ENDPOINT, {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify(payload),
-                    mode: "cors",
+                    mode: "no-cors",
                     cache: "no-store"
                 });
-                if (!res.ok) throw new Error(`送信に失敗しました (${res.status})`);
             } catch (err) {
                 console.error(err);
-                alert("送信に失敗しました。GAS側のCORS設定（Access-Control-Allow-Origin:*）とデプロイ設定を確認してください。");
-                return;
+                // no-cors のため結果は判定しない
             }
 
             form.reset();
