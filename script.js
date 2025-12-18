@@ -301,6 +301,17 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     };
 
+    const bindGalleryLinks = () => {
+        document.querySelectorAll(".gallery-card[data-link]").forEach(card => {
+            const url = card.dataset.link;
+            if (!url) return;
+            card.style.cursor = "pointer";
+            card.addEventListener("click", () => {
+                window.open(url, "_blank", "noopener");
+            });
+        });
+    };
+
     const initAnchors = () => {
         document.querySelectorAll('a[href^="#"]').forEach(link => {
             link.addEventListener("click", event => {
@@ -339,6 +350,7 @@ document.addEventListener("DOMContentLoaded", () => {
         applyReveal();
         bindModal();
         bindContactForm();
+        bindGalleryLinks();
         initAnchors();
         initCurrentMonth();
     };
