@@ -1027,6 +1027,7 @@ body.dark-page {
     height: 100%;
     border: none;
     pointer-events: none;
+    object-fit: cover;
 }
 
 .video-embed .placeholder {
