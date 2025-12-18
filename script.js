@@ -177,6 +177,16 @@ document.addEventListener("DOMContentLoaded", () => {
         dots.className = "carousel-dots";
         const controls = document.createElement("div");
         controls.className = "carousel-controls";
+        const prevBtn = document.createElement("button");
+        prevBtn.type = "button";
+        prevBtn.className = "carousel-arrow";
+        prevBtn.setAttribute("aria-label", "前へ");
+        prevBtn.innerHTML = "&#8592;";
+        const nextBtn = document.createElement("button");
+        nextBtn.type = "button";
+        nextBtn.className = "carousel-arrow";
+        nextBtn.setAttribute("aria-label", "次へ");
+        nextBtn.innerHTML = "&#8594;";
         const windowEl = document.createElement("div");
         windowEl.className = "carousel-window";
         windowEl.appendChild(track);
@@ -184,7 +194,9 @@ document.addEventListener("DOMContentLoaded", () => {
         carousel.innerHTML = "";
         carousel.appendChild(windowEl);
         carousel.appendChild(controls);
+        controls.appendChild(prevBtn);
         controls.appendChild(dots);
+        controls.appendChild(nextBtn);
 
         items.forEach((item, idx) => {
             const slide = document.createElement("div");
@@ -238,6 +250,16 @@ document.addEventListener("DOMContentLoaded", () => {
             stop();
             timer = setInterval(() => goTo(index + 1), 3000);
         };
+
+        prevBtn.addEventListener("click", () => {
+            goTo(index - 1);
+            restart();
+        });
+
+        nextBtn.addEventListener("click", () => {
+            goTo(index + 1);
+            restart();
+        });
 
         carousel.addEventListener("mouseenter", stop);
         carousel.addEventListener("mouseleave", restart);
