@@ -439,7 +439,8 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         }
         toggle.addEventListener("click", () => {
-            nav.classList.toggle("open");
+            const opened = nav.classList.toggle("open");
+            document.body.classList.toggle("nav-open", opened);
         });
     };
 
