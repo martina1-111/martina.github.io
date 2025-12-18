@@ -414,6 +414,26 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     };
 
+    const bindMenuToggle = () => {
+        let toggle = document.querySelector(".menu-toggle");
+        let nav = document.querySelector(".site-nav") || document.querySelector(".site-header nav");
+        if (!nav) return;
+        nav.classList.add("site-nav");
+        if (!toggle) {
+            toggle = document.createElement("button");
+            toggle.className = "menu-toggle";
+            toggle.setAttribute("aria-label", "メニュー");
+            toggle.textContent = "☰";
+            const layout = document.querySelector(".nav-layout");
+            if (layout) {
+                layout.insertBefore(toggle, nav);
+            }
+        }
+        toggle.addEventListener("click", () => {
+            nav.classList.toggle("open");
+        });
+    };
+
     const init = async () => {
         applyReveal();
         const videoData = await loadVideos();
@@ -437,6 +457,7 @@ document.addEventListener("DOMContentLoaded", () => {
         bindModal();
         bindContactForm();
         bindGalleryLinks();
+        bindMenuToggle();
         initAnchors();
         initCurrentMonth();
     };
