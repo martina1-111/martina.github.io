@@ -65,12 +65,14 @@
       <div class="container contact-layout">
 
         <!-- 送信用（CORS回避） -->
-        <iframe name="contact_sink" id="contact_sink" style="display:none;"></iframe>
+        <iframe name="contact_sink" style="display:none;"></iframe>
 
         <form id="contact-form" class="contact-card reveal"
-              method="POST" target="contact_sink"
-              accept-charset="UTF-8"
-              enctype="application/x-www-form-urlencoded">
+            action="https://script.google.com/macros/s/AKfycbxZ2rU7QfpG6fHdnflt1NkWbiNRhwu2gytz2uT0xM2qqFgpYRxt0teF08bLmNgtHYbs/exec"
+            method="POST"
+            target="contact_sink"
+            accept-charset="UTF-8"
+            enctype="application/x-www-form-urlencoded">
 
           <!-- GASへ渡す隠し項目 -->
           <input type="hidden" id="subject" name="subject" value="">
@@ -137,7 +139,7 @@
 
   <script>
     // Google Apps Script エンドポイント（あなたのWebアプリURL）
-    window.CONTACT_ENDPOINT = "https://script.google.com/macros/s/AKfycbwtmPLrDHsz_f06UuBWOx2QdIDKEi55HLEQkdB5SGkcrSm8nYjoalXGTjFLETfGtOT2/exec";
+    window.CONTACT_ENDPOINT = "https://script.google.com/macros/s/AKfycbx0o0qPRypRWWCorUZPCgt-vvPHiZOrNCj9A_kSDftnDCl2c6FZM4ZTp3H-lpb2lvG0/exec";
   </script>
 
   <!-- 既存のサイト用JS（アニメーション等） -->
