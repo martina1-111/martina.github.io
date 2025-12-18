@@ -139,7 +139,7 @@
 
   <script>
     // Google Apps Script エンドポイント（あなたのWebアプリURL）
-    window.CONTACT_ENDPOINT = "https://script.google.com/macros/s/AKfycbx0o0qPRypRWWCorUZPCgt-vvPHiZOrNCj9A_kSDftnDCl2c6FZM4ZTp3H-lpb2lvG0/exec";
+    window.CONTACT_ENDPOINT = "https://script.google.com/macros/s/AKfycbzqvJjA_3MxfM5xyCxyunWitHth1qzEaE4tZBZAJ4kaFmWj1ypUYQPGGWMxipPG_BNl/exec";
   </script>
 
   <!-- 既存のサイト用JS（アニメーション等） -->
@@ -216,7 +216,7 @@
 
         const requestId = makeRequestId();
         document.getElementById("requestId").value = requestId;
-        document.getElementById("subject").value = `サイトお問い合わせ ${requestId}`;
+        document.getElementById("subject").value = "サイトからの問い合わせ";
 
         // 送信中表示
         submitted = true;
