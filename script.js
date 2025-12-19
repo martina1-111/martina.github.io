@@ -512,7 +512,7 @@ document.addEventListener("DOMContentLoaded", () => {
         return copy.slice(0, count);
     };
 
-    const slides = pickRandom(pool, 8);
+    const slides = pickRandom(pool, 18);
 
     const grid = splash.querySelector(".splash-grid");
     slides.forEach(item => {
@@ -520,10 +520,6 @@ document.addEventListener("DOMContentLoaded", () => {
         cell.className = "splash-card";
         cell.innerHTML = `
             <div class="splash-thumb" style="background-image:url('${item.img}')"></div>
-            <div class="splash-meta">
-                <p class="splash-item-title">${item.title}</p>
-                <p class="splash-item-desc">${item.desc}</p>
-            </div>
         `;
         grid.appendChild(cell);
     });
