@@ -115,12 +115,19 @@ body.dark-page {
     padding: 6px 10px;
     font-size: 1rem;
     cursor: pointer;
+    margin-left: auto;
+    order: 3;
 }
 
 .header-actions {
     display: flex;
     align-items: center;
     gap: 10px;
+    order: 2;
+}
+
+.site-nav {
+    order: 1;
 }
 
 .social-links {
@@ -220,11 +227,14 @@ body.dark-page {
 
   .menu-toggle {
     display: inline-flex;
+    margin-left: auto;
+    order: 3;
   }
 
   .site-nav {
     display: none;
     width: 100%;
+    order: 1;
   }
 
   /* ここ：先頭に } を付けない */
@@ -283,7 +293,12 @@ body.dark-page {
     width: 100%;
     justify-content: flex-start;
     flex-wrap: wrap;
+    order: 2;
   }
+}
+
+body.nav-open {
+  overflow: hidden;
 }
 
 
