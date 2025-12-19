@@ -477,64 +477,33 @@ document.addEventListener("DOMContentLoaded", () => {
     init();
 });
 
-// ---------- Splash (one-time, full overlay, auto fade) ----------
+// ---------- Loading overlay (lightweight, every load, auto hide) ----------
 document.addEventListener("DOMContentLoaded", () => {
     const splash = document.getElementById("splash");
     if (!splash) return;
 
-    const SPLASH_KEY = "splashSeenV3";
-    const seen = localStorage.getItem(SPLASH_KEY) === "true";
-    if (seen) return;
-
-    const pool = [
-        { title: "ソフトバンク様3D映像制作", desc: "展示向け3Dコンテンツ", img: "CG/cg-softbank-20241208.webp" },
-        { title: "Faint Hope", desc: "ショートフィルム用ルック", img: "CG/『Faint Hope』.webp" },
-        { title: "Happy Valentine", desc: "演出ビジュアル", img: "CG/Happy Valentine01.webp" },
-        { title: "ガーリーなお部屋", desc: "インテリアCG", img: "CG/cg-girly-room-01.webp" },
-        { title: "メタバースファッション", desc: "経産省コンテスト入賞", img: "assets/others/metaverse-award.jpg" },
-        { title: "インタビュー掲載", desc: "働き方/制作の話", img: "assets/others/interview.webp" },
-        { title: "登壇", desc: "新しい働き方AWARD", img: "assets/others/stage.jpg" },
-        { title: "青学HP掲載", desc: "研究ラボ成果紹介", img: "assets/others/aogaku.jpg" },
-        { title: "パンフレット制作", desc: "制作事例", img: "graphics/g-pamphlet-05.webp" },
-        { title: "点描イラスト NaTure", desc: "Illustration", img: "graphics/NaTure.webp" },
-        { title: "LOGO Hayashi Rice", desc: "ロゴ制作", img: "graphics/g-hayashi-rice.webp" },
-        { title: "MESSAGE展", desc: "展示作品", img: "graphics/MESSAGE展.webp" },
-        { title: "WEB制作", desc: "Smoothie Studio", img: "assets/web-smoothie.webp" },
-        { title: "ブログ note", desc: "Articles on note", img: "assets/articles-note.webp" }
-    ];
-
-    const pickRandom = (arr, count) => {
-        const copy = [...arr];
-        for (let i = copy.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [copy[i], copy[j]] = [copy[j], copy[i]];
-        }
-        return copy.slice(0, count);
-    };
-
-    const slides = pickRandom(pool, 18);
-
-    const grid = splash.querySelector(".splash-grid");
-    slides.forEach(item => {
-        const cell = document.createElement("div");
-        cell.className = "splash-card";
-        cell.innerHTML = `
-            <div class="splash-thumb" style="background-image:url('${item.img}')"></div>
+    // Replace content with a simple loader
+    const content = splash.querySelector(".splash-content");
+    if (content) {
+        content.innerHTML = `
+            <div class="splash-loader">
+                <span></span><span></span><span></span>
+            </div>
         `;
-        grid.appendChild(cell);
-    });
+    }
 
-    // show overlay
     splash.classList.remove("hidden");
-    document.body.style.overflow = "hidden";
+    document.body.classList.add("nav-open"); // reuse to lock scroll
 
-    // auto fade after 3s
-    setTimeout(() => {
+    const hideSplash = () => {
         splash.classList.add("fade-out");
         setTimeout(() => {
             splash.classList.add("hidden");
-            document.body.style.overflow = "";
-            localStorage.setItem(SPLASH_KEY, "true");
-        }, 600);
-    }, 3000);
+            document.body.classList.remove("nav-open");
+        }, 500);
+    };
+
+    // hide on full load or after fallback timeout
+    window.addEventListener("load", () => hideSplash(), { once: true });
+    setTimeout(hideSplash, 1800);
 });
