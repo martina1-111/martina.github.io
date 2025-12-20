@@ -507,3 +507,23 @@ document.addEventListener("DOMContentLoaded", () => {
     window.addEventListener("load", () => hideSplash(), { once: true });
     setTimeout(hideSplash, 1800);
 });
+
+// ---------- Glow cursor ----------
+document.addEventListener("DOMContentLoaded", () => {
+    const cursor = document.createElement("div");
+    cursor.className = "glow-cursor";
+    document.body.appendChild(cursor);
+
+    const move = e => {
+        cursor.style.left = `${e.clientX}px`;
+        cursor.style.top = `${e.clientY}px`;
+    };
+
+    const activate = () => cursor.classList.add("active");
+    const deactivate = () => cursor.classList.remove("active");
+
+    document.addEventListener("mousemove", move);
+    document.addEventListener("mousedown", activate);
+    document.addEventListener("mouseup", deactivate);
+    document.addEventListener("mouseleave", deactivate);
+});
