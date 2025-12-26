@@ -503,10 +503,12 @@ html.newyear-page,
 body.newyear-page {
     height: 100%;
     overflow: hidden;
+    background: #000;
 }
 
 .newyear-screen {
-    min-height: 100%;
+    height: 100vh;
+    width: 100vw;
     position: relative;
     overflow: hidden;
 }
