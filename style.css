@@ -530,14 +530,48 @@ body.newyear-page {
     inset: 0;
     display: flex;
     align-items: flex-end;
-    justify-content: flex-end;
-    padding: 24px;
+    justify-content: space-between;
+    padding: 28px;
     pointer-events: none;
+}
+
+.newyear-message {
+    pointer-events: none;
+    color: #fff;
+    font-family: "Space Grotesk", var(--font-en);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    animation: nyFadeUp 1.2s ease forwards;
+    opacity: 0;
+}
+
+.newyear-kicker {
+    font-size: clamp(1.4rem, 2vw + 1rem, 2.2rem);
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.newyear-body {
+    font-size: clamp(0.9rem, 1vw + 0.6rem, 1.1rem);
+    letter-spacing: 0.04em;
+    margin-bottom: 6px;
+    text-transform: none;
+    font-family: var(--font-jp);
+}
+
+.newyear-sign {
+    font-size: 0.95rem;
+    letter-spacing: 0.2em;
 }
 
 .newyear-overlay .btn {
     pointer-events: auto;
     background: rgba(255,255,255,0.85);
+}
+
+@keyframes nyFadeUp {
+    0% { transform: translateY(20px); opacity: 0; }
+    100% { transform: translateY(0); opacity: 1; }
 }
 
 .newyear-visual {
