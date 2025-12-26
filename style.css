@@ -498,6 +498,30 @@ body.nav-open {
     line-height: 1.7;
 }
 
+/* New Year full screen page */
+html.newyear-page,
+body.newyear-page {
+    height: 100%;
+    overflow: hidden;
+}
+
+.newyear-screen {
+    min-height: 100%;
+    display: grid;
+    place-items: center;
+    padding: 24px;
+}
+
+.newyear-screen-inner {
+    width: min(960px, 92vw);
+    display: grid;
+    gap: 14px;
+}
+
+.newyear-screen h1 {
+    font-size: clamp(2rem, 3vw + 1rem, 3rem);
+}
+
 .newyear-visual {
     position: relative;
     min-height: 220px;

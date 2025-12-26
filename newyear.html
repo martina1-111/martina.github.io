@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    <title>New Year 2026 | Marina Kawaguchi</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="newyear-page">
+    <main class="newyear-screen">
+        <div class="newyear-screen-inner">
+            <p class="eyebrow">New Year 2026</p>
+            <h1>午の年、走り出す年賀。</h1>
+            <p class="lede">タップすると色相が変化し、馬の軌跡が揺らぐインタラクティブ年賀。</p>
+            <div class="newyear-visual is-active" role="button" tabindex="0" aria-label="年賀ビジュアルを操作" data-newyear>
+                <div class="newyear-gradient"></div>
+                <div class="newyear-stamp">2026</div>
+                <div class="newyear-lines"></div>
+                <div class="newyear-horse">
+                    <svg viewBox="0 0 220 120" aria-hidden="true">
+                        <path d="M20 90 L60 60 L92 60 L110 42 L140 40 L164 52 L176 46 L196 60 L184 78 L200 90 L184 96 L164 88 L148 98 L120 92 L96 92 L78 104 L52 104 L36 94 Z" fill="none" stroke="currentColor" stroke-width="4" stroke-linejoin="round"/>
+                        <circle cx="156" cy="54" r="3" fill="currentColor"/>
+                    </svg>
+                </div>
+                <div class="newyear-hint">Tap / Click</div>
+            </div>
+            <div class="cta-row">
+                <a class="btn ghost" href="index.html">Topに戻る</a>
+            </div>
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
