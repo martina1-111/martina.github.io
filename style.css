@@ -490,6 +490,14 @@ body.nav-open {
     max-width: 540px;
 }
 
+.newyear-list {
+    margin: 12px 0 6px;
+    color: var(--text-sub);
+    font-family: var(--font-jp);
+    font-size: 0.95rem;
+    line-height: 1.7;
+}
+
 .newyear-visual {
     position: relative;
     min-height: 220px;
