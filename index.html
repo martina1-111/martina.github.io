@@ -85,10 +85,10 @@
             <div class="container newyear-card reveal">
                 <div class="newyear-copy">
                     <p class="eyebrow">New Year 2026</p>
-                    <h3>「年賀を、触れて進むメディアに。」</h3>
-                    <p class="lede">デジタルだからできる“動き・音・参加”を仕込んだ年賀。スクロールやタップで演出が変わる体験型ビジュアルとして設計しています。</p>
+                    <h3>「午の年、走り出す年賀。」</h3>
+                    <p class="lede">デジタルだからできる“動き・参加”を仕込んだ年賀。タップで馬の軌跡と色相が変わる、体験型ビジュアルとして設計しています。</p>
                     <div class="newyear-list">
-                        <p>・タップで梅の粒がほどけ、背景の色相がシフト</p>
+                        <p>・タップで馬の軌跡が伸び、背景の色相がシフト</p>
                         <p>・日付で表情が変わるモーション（元日〜三が日）</p>
                         <p>・最後にAR年賀へ遷移できるQRを埋め込み</p>
                     </div>
@@ -98,10 +98,17 @@
                         <span class="chip ghost">Interactive</span>
                     </div>
                 </div>
-                <div class="newyear-visual">
+                <div class="newyear-visual" role="button" tabindex="0" aria-label="年賀ビジュアルを操作" data-newyear>
                     <div class="newyear-gradient"></div>
                     <div class="newyear-stamp">2026</div>
                     <div class="newyear-lines"></div>
+                    <div class="newyear-horse">
+                        <svg viewBox="0 0 220 120" aria-hidden="true">
+                            <path d="M20 90 L60 60 L92 60 L110 42 L140 40 L164 52 L176 46 L196 60 L184 78 L200 90 L184 96 L164 88 L148 98 L120 92 L96 92 L78 104 L52 104 L36 94 Z" fill="none" stroke="currentColor" stroke-width="4" stroke-linejoin="round"/>
+                            <circle cx="156" cy="54" r="3" fill="currentColor"/>
+                        </svg>
+                    </div>
+                    <div class="newyear-hint">Tap / Click</div>
                 </div>
             </div>
         </section>

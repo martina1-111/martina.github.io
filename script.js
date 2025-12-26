@@ -507,3 +507,29 @@ document.addEventListener("DOMContentLoaded", () => {
     window.addEventListener("load", () => hideSplash(), { once: true });
     setTimeout(hideSplash, 1800);
 });
+
+// ---------- New Year interactive visual ----------
+document.addEventListener("DOMContentLoaded", () => {
+    const visuals = document.querySelectorAll("[data-newyear]");
+    if (!visuals.length) return;
+
+    const activate = visual => {
+        visual.classList.add("is-active");
+        const hue = Math.floor(Math.random() * 40) - 20;
+        visual.style.filter = `hue-rotate(${hue}deg)`;
+        setTimeout(() => {
+            visual.classList.remove("is-active");
+            visual.style.filter = "";
+        }, 1200);
+    };
+
+    visuals.forEach(visual => {
+        visual.addEventListener("click", () => activate(visual));
+        visual.addEventListener("keydown", event => {
+            if (event.key === "Enter" || event.key === " ") {
+                event.preventDefault();
+                activate(visual);
+            }
+        });
+    });
+});
