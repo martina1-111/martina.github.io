@@ -552,6 +552,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 if (message) message.classList.add("hidden");
                 wishSection.classList.add("show");
                 wishSection.setAttribute("aria-hidden", "false");
+                if (wishMarquee) wishMarquee.classList.add("is-active");
             }, 1200);
         }, 5000);
     }
@@ -589,19 +590,21 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         };
 
-        const activeSlots = [];
-        const MIN_GAP = 16;
-
-        const pickLeft = () => {
-            for (let i = 0; i < 8; i += 1) {
-                let x = Math.random() * 90 + 5;
-                if (x > 35 && x < 65) {
-                    x = x < 50 ? 30 : 70;
+        const LANES = 9;
+        const laneCooldown = new Array(LANES).fill(0);
+        const pickLane = durationMs => {
+            const now = Date.now();
+            const order = Array.from({ length: LANES }, (_, i) => i)
+                .sort(() => Math.random() - 0.5);
+            for (const idx of order) {
+                if (laneCooldown[idx] <= now) {
+                    laneCooldown[idx] = now + durationMs * 0.6;
+                    return idx;
                 }
-                const tooClose = activeSlots.some(slot => Math.abs(slot.x - x) < MIN_GAP);
-                if (!tooClose) return x;
             }
-            return Math.random() * 90 + 5;
+            const fallback = Math.floor(Math.random() * LANES);
+            laneCooldown[fallback] = now + durationMs * 0.4;
+            return fallback;
         };
 
         const spawnBubble = (text, options = {}) => {
@@ -612,9 +615,11 @@ document.addEventListener("DOMContentLoaded", () => {
             const speed = 12 + Math.random() * 10;
             const delay = options.initial ? -Math.random() * speed : Math.random() * 2;
             const z = Math.floor(Math.random() * 3) + 1;
-            const left = pickLeft();
-            const slot = { x: left };
-            activeSlots.push(slot);
+            const durationMs = speed * 1000;
+            const lane = pickLane(durationMs);
+            const gutter = 4;
+            const laneWidth = (100 - gutter * 2) / LANES;
+            const left = gutter + lane * laneWidth + laneWidth * 0.1;
             bubble.style.left = `${left}%`;
             bubble.style.animationDelay = `${delay}s`;
             bubble.style.animationDuration = `${speed}s`;
@@ -622,8 +627,6 @@ document.addEventListener("DOMContentLoaded", () => {
             bubble.style.zIndex = String(z);
             wishMarquee.appendChild(bubble);
             bubble.addEventListener("animationend", () => {
-                const idx = activeSlots.indexOf(slot);
-                if (idx > -1) activeSlots.splice(idx, 1);
                 bubble.remove();
             });
         };
@@ -640,7 +643,22 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         };
 
-        seedBubbles();
+        let bubbleTimer = null;
+        const startBubbles = () => {
+            if (bubbleTimer) return;
+            seedBubbles();
+            bubbleTimer = setInterval(async () => {
+                const items = await fetchWishes();
+                if (!items.length) return;
+                const text = items[Math.floor(Math.random() * items.length)];
+                spawnBubble(text);
+                const bubbles = wishMarquee.querySelectorAll(".wish-bubble");
+                if (bubbles.length > MAX_BUBBLES) {
+                    bubbles[0].remove();
+                }
+            }, 1600);
+        };
+
         wishForm.addEventListener("submit", async event => {
             event.preventDefault();
             const input = wishForm.querySelector("input[name='wish']");
@@ -655,16 +673,21 @@ document.addEventListener("DOMContentLoaded", () => {
         });
 
         const MAX_BUBBLES = 24;
-        setInterval(async () => {
-            const items = await fetchWishes();
-            if (!items.length) return;
-            const text = items[Math.floor(Math.random() * items.length)];
-            spawnBubble(text);
-            const bubbles = wishMarquee.querySelectorAll(".wish-bubble");
-            if (bubbles.length > MAX_BUBBLES) {
-                bubbles[0].remove();
-            }
-        }, 1400);
+
+        if (wishSection?.classList.contains("show")) {
+            wishMarquee.classList.add("is-active");
+            startBubbles();
+        }
+        if (wishSection) {
+            const observer = new MutationObserver(() => {
+                if (wishSection.classList.contains("show")) {
+                    wishMarquee.classList.add("is-active");
+                    startBubbles();
+                    observer.disconnect();
+                }
+            });
+            observer.observe(wishSection, { attributes: true, attributeFilter: ["class"] });
+        }
     }
 
     if (countdown) {
