@@ -556,7 +556,37 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (wishForm && wishMarquee) {
         const KEY = "newyearWishes";
-        const getWishes = () => JSON.parse(localStorage.getItem(KEY) || "[]");
+        const API_URL = "https://script.google.com/macros/s/AKfycbyfhl0uady-JAKXrci8KmzyJZc672hkfJMAJ4SozPIp3T0ksc6GuMw0Uz038G0HVz6YTQ/exec";
+        const getLocalWishes = () => JSON.parse(localStorage.getItem(KEY) || "[]");
+        const saveLocalWishes = items => localStorage.setItem(KEY, JSON.stringify(items));
+
+        const fetchWishes = async () => {
+            try {
+                const res = await fetch(API_URL);
+                const data = await res.json();
+                if (data && data.ok && Array.isArray(data.messages)) {
+                    return data.messages;
+                }
+            } catch (err) {
+                // fall back to local if GAS is unreachable
+            }
+            return getLocalWishes();
+        };
+
+        const postWish = async message => {
+            try {
+                const res = await fetch(API_URL, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ message })
+                });
+                const data = await res.json();
+                return !!(data && data.ok);
+            } catch (err) {
+                return false;
+            }
+        };
+
         const spawnBubble = text => {
             const bubble = document.createElement("div");
             bubble.className = "wish-bubble";
@@ -573,9 +603,9 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         };
 
-        const seedBubbles = () => {
+        const seedBubbles = async () => {
             wishMarquee.innerHTML = "";
-            const items = getWishes();
+            const items = await fetchWishes();
             if (!items.length) {
                 ["健康に過ごしたい", "新しいことに挑戦", "笑顔の多い一年"].forEach(spawnBubble);
                 return;
@@ -584,24 +614,25 @@ document.addEventListener("DOMContentLoaded", () => {
         };
 
         seedBubbles();
-        wishForm.addEventListener("submit", event => {
+        wishForm.addEventListener("submit", async event => {
             event.preventDefault();
             const input = wishForm.querySelector("input[name='wish']");
             const value = (input.value || "").trim();
             if (!value) return;
-            const items = getWishes();
+            const items = getLocalWishes();
             items.push(value);
-            localStorage.setItem(KEY, JSON.stringify(items));
+            saveLocalWishes(items);
             input.value = "";
             spawnBubble(value);
+            await postWish(value);
         });
 
-        setInterval(() => {
-            const items = getWishes();
+        setInterval(async () => {
+            const items = await fetchWishes();
             if (!items.length) return;
             const text = items[Math.floor(Math.random() * items.length)];
             spawnBubble(text);
-        }, 1800);
+        }, 2200);
     }
 
     if (countdown) {
