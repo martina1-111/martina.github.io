@@ -536,6 +536,35 @@ body.newyear-page {
     z-index: 5;
 }
 
+.newyear-guide {
+    align-self: flex-start;
+    background: rgba(255,255,255,0.85);
+    border: 1px solid rgba(0,0,0,0.15);
+    border-radius: 12px;
+    padding: 12px 14px;
+    font-size: 0.8rem;
+    color: #111;
+    max-width: 240px;
+    pointer-events: none;
+}
+
+.newyear-guide .guide-title {
+    font-weight: 600;
+    margin-bottom: 6px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.newyear-guide ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: 6px;
+    font-family: var(--font-jp);
+    letter-spacing: 0.02em;
+}
+
 .newyear-message {
     pointer-events: none;
     color: #111;
@@ -592,7 +621,9 @@ body.newyear-page {
     inset: 0;
     display: grid;
     place-items: center;
-    background: rgba(249,248,246,0.92);
+    background: url("assets/newyear.png") center / cover no-repeat,
+        rgba(249,248,246,0.92);
+    background-blend-mode: lighten;
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.8s ease;
