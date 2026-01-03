@@ -553,7 +553,7 @@ body.newyear-page {
     align-items: flex-end;
     justify-content: space-between;
     padding: 28px;
-    pointer-events: auto;
+    pointer-events: none;
     z-index: 5;
 }
 
@@ -571,6 +571,11 @@ body.newyear-page {
     letter-spacing: 0.08em;
     animation: nyFadeUp 1.2s ease forwards;
     opacity: 0;
+}
+
+.newyear-message.hidden {
+    opacity: 0;
+    pointer-events: none;
 }
 
 .newyear-kicker {
@@ -602,6 +607,9 @@ body.newyear-page {
     gap: 10px;
     align-items: center;
     pointer-events: auto;
+    position: fixed;
+    right: 24px;
+    bottom: 24px;
 }
 
 .newyear-countdown {
