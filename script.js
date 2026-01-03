@@ -662,10 +662,11 @@ document.addEventListener("DOMContentLoaded", () => {
             if (bubbleTimer) return;
             wishMarquee.classList.add("is-active");
             seedBubbles();
+            const fallback = ["健康に過ごしたい", "新しいことに挑戦", "笑顔の多い一年"];
             bubbleTimer = setInterval(async () => {
                 const items = await fetchWishes();
-                if (!items.length) return;
-                const text = items[Math.floor(Math.random() * items.length)];
+                const pool = items.length ? items : fallback;
+                const text = pool[Math.floor(Math.random() * pool.length)];
                 spawnBubble(text);
                 const bubbles = wishMarquee.querySelectorAll(".wish-bubble");
                 if (bubbles.length > MAX_BUBBLES) {
