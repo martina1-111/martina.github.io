@@ -577,17 +577,20 @@ document.addEventListener("DOMContentLoaded", () => {
         const getLocalWishes = () => JSON.parse(localStorage.getItem(KEY) || "[]");
         const saveLocalWishes = items => localStorage.setItem(KEY, JSON.stringify(items));
 
+        let cachedMessages = [];
         const fetchWishes = async () => {
             try {
                 const res = await fetch(API_URL);
                 const data = await res.json();
                 if (data && data.ok && Array.isArray(data.messages)) {
-                    return data.messages;
+                    cachedMessages = data.messages.slice();
+                    return cachedMessages;
                 }
             } catch (err) {
                 // fall back to local if GAS is unreachable
             }
-            return getLocalWishes();
+            cachedMessages = getLocalWishes();
+            return cachedMessages;
         };
 
         const postWish = async message => {
@@ -664,8 +667,7 @@ document.addEventListener("DOMContentLoaded", () => {
             seedBubbles();
             const fallback = ["健康に過ごしたい", "新しいことに挑戦", "笑顔の多い一年"];
             bubbleTimer = setInterval(async () => {
-                const items = await fetchWishes();
-                const pool = items.length ? items : fallback;
+                const pool = cachedMessages.length ? cachedMessages : fallback;
                 const text = pool[Math.floor(Math.random() * pool.length)];
                 spawnBubble(text);
                 const bubbles = wishMarquee.querySelectorAll(".wish-bubble");
@@ -685,7 +687,12 @@ document.addEventListener("DOMContentLoaded", () => {
             saveLocalWishes(items);
             input.value = "";
             spawnBubble(value);
-            await postWish(value);
+            const ok = await postWish(value);
+            if (ok) {
+                cachedMessages.push(value);
+            } else {
+                fetchWishes();
+            }
         });
 
         const MAX_BUBBLES = 24;
