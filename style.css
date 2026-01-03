@@ -530,6 +530,8 @@ body.newyear-page {
 .newyear-screen {
     height: 100vh;
     width: 100vw;
+    min-height: 100%;
+    min-width: 100%;
     position: relative;
     overflow: hidden;
 }
@@ -627,9 +629,8 @@ body.newyear-page {
     inset: 0;
     display: grid;
     place-items: center;
-    background: url("assets/newyear.png") center / cover no-repeat,
-        rgba(249,248,246,0.92);
-    background-blend-mode: lighten;
+    background: url("assets/newyear.png") center / cover no-repeat;
+    background-size: cover;
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.8s ease;
@@ -681,7 +682,7 @@ body.newyear-page {
     position: absolute;
     left: 0;
     bottom: -60px;
-    max-width: min(70%, 420px);
+    width: min(36vw, 14ch);
     background: #fff;
     border: 1px solid rgba(0,0,0,0.12);
     border-radius: 22px;
@@ -731,7 +732,7 @@ body.newyear-page {
     }
 
     .wish-bubble {
-        max-width: 82%;
+        width: min(70vw, 16ch);
         font-size: 0.9rem;
         padding: 8px 12px;
     }
