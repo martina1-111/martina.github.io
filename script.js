@@ -545,13 +545,13 @@ document.addEventListener("DOMContentLoaded", () => {
     const particlesCanvas = document.querySelector(".newyear-particles");
 
     if (videoWrap && wishSection) {
-        wishSection.classList.add("show");
-        wishSection.setAttribute("aria-hidden", "false");
         setTimeout(() => {
             videoWrap.classList.add("fade-out");
             setTimeout(() => {
                 const message = document.querySelector(".newyear-message");
                 if (message) message.classList.add("hidden");
+                wishSection.classList.add("show");
+                wishSection.setAttribute("aria-hidden", "false");
             }, 1200);
         }, 5000);
     }
@@ -589,6 +589,21 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         };
 
+        const activeSlots = [];
+        const MIN_GAP = 16;
+
+        const pickLeft = () => {
+            for (let i = 0; i < 8; i += 1) {
+                let x = Math.random() * 90 + 5;
+                if (x > 35 && x < 65) {
+                    x = x < 50 ? 30 : 70;
+                }
+                const tooClose = activeSlots.some(slot => Math.abs(slot.x - x) < MIN_GAP);
+                if (!tooClose) return x;
+            }
+            return Math.random() * 90 + 5;
+        };
+
         const spawnBubble = (text, options = {}) => {
             const bubble = document.createElement("div");
             bubble.className = "wish-bubble";
@@ -597,14 +612,9 @@ document.addEventListener("DOMContentLoaded", () => {
             const speed = 12 + Math.random() * 10;
             const delay = options.initial ? -Math.random() * speed : Math.random() * 2;
             const z = Math.floor(Math.random() * 3) + 1;
-            const left = (() => {
-                let x = Math.random() * 90 + 5;
-                // avoid center 35% - 65%
-                if (x > 35 && x < 65) {
-                    x = x < 50 ? 32 : 68;
-                }
-                return x;
-            })();
+            const left = pickLeft();
+            const slot = { x: left };
+            activeSlots.push(slot);
             bubble.style.left = `${left}%`;
             bubble.style.animationDelay = `${delay}s`;
             bubble.style.animationDuration = `${speed}s`;
@@ -612,6 +622,8 @@ document.addEventListener("DOMContentLoaded", () => {
             bubble.style.zIndex = String(z);
             wishMarquee.appendChild(bubble);
             bubble.addEventListener("animationend", () => {
+                const idx = activeSlots.indexOf(slot);
+                if (idx > -1) activeSlots.splice(idx, 1);
                 bubble.remove();
             });
         };
@@ -622,7 +634,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const base = items.length
                 ? items
                 : ["健康に過ごしたい", "新しいことに挑戦", "笑顔の多い一年"];
-            const initialCount = 18;
+            const initialCount = 14;
             for (let i = 0; i < initialCount; i += 1) {
                 spawnBubble(base[i % base.length], { initial: true });
             }
