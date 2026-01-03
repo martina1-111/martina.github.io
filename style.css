@@ -537,7 +537,7 @@ body.newyear-page {
 
 .newyear-message {
     pointer-events: none;
-    color: #fff;
+    color: #111;
     font-family: "Space Grotesk", var(--font-en);
     text-transform: uppercase;
     letter-spacing: 0.08em;
