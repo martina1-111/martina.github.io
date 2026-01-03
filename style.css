@@ -682,7 +682,7 @@ body.newyear-page {
     left: 0;
     bottom: -60px;
     max-width: min(70%, 420px);
-    background: rgba(255,255,255,0.92);
+    background: #fff;
     border: 1px solid rgba(0,0,0,0.12);
     border-radius: 22px;
     padding: 10px 16px;
@@ -699,7 +699,7 @@ body.newyear-page {
     bottom: -10px;
     width: 16px;
     height: 16px;
-    background: rgba(255,255,255,0.92);
+    background: #fff;
     border-left: 1px solid rgba(0,0,0,0.12);
     border-bottom: 1px solid rgba(0,0,0,0.12);
     transform: rotate(45deg);
