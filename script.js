@@ -550,6 +550,8 @@ document.addEventListener("DOMContentLoaded", () => {
             setTimeout(() => {
                 wishSection.classList.add("show");
                 wishSection.setAttribute("aria-hidden", "false");
+                const overlay = document.querySelector(".newyear-overlay");
+                if (overlay) overlay.classList.add("hidden");
             }, 1200);
         }, 5000);
     }

@@ -557,6 +557,11 @@ body.newyear-page {
     z-index: 5;
 }
 
+.newyear-overlay.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
 
 .newyear-message {
     pointer-events: none;
