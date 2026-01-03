@@ -533,3 +533,137 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 });
+
+// ---------- New Year page interactions ----------
+document.addEventListener("DOMContentLoaded", () => {
+    const wishSection = document.querySelector(".newyear-wish");
+    const wishForm = document.querySelector(".wish-form");
+    const wishWall = document.querySelector(".wish-wall");
+    const countdown = document.querySelector(".newyear-countdown");
+    const videoWrap = document.querySelector(".newyear-video");
+    const audioToggle = document.querySelector(".audio-toggle");
+    const particlesCanvas = document.querySelector(".newyear-particles");
+
+    if (videoWrap && wishSection) {
+        setTimeout(() => {
+            videoWrap.classList.add("fade-out");
+            setTimeout(() => {
+                wishSection.classList.add("show");
+                wishSection.setAttribute("aria-hidden", "false");
+            }, 1200);
+        }, 5000);
+    }
+
+    if (wishForm && wishWall) {
+        const KEY = "newyearWishes";
+        const renderWishes = () => {
+            const items = JSON.parse(localStorage.getItem(KEY) || "[]");
+            wishWall.innerHTML = "";
+            items.slice(-30).reverse().forEach(text => {
+                const div = document.createElement("div");
+                div.className = "wish-item";
+                div.textContent = text;
+                wishWall.appendChild(div);
+            });
+        };
+
+        renderWishes();
+        wishForm.addEventListener("submit", event => {
+            event.preventDefault();
+            const input = wishForm.querySelector("input[name='wish']");
+            const value = (input.value || "").trim();
+            if (!value) return;
+            const items = JSON.parse(localStorage.getItem(KEY) || "[]");
+            items.push(value);
+            localStorage.setItem(KEY, JSON.stringify(items));
+            input.value = "";
+            renderWishes();
+        });
+    }
+
+    if (countdown) {
+        const updateCountdown = () => {
+            const now = new Date();
+            const end = new Date(now.getFullYear() + 1, 0, 1);
+            const diff = end - now;
+            const days = Math.max(0, Math.floor(diff / (1000 * 60 * 60 * 24)));
+            const hours = Math.max(0, Math.floor((diff / (1000 * 60 * 60)) % 24));
+            countdown.textContent = `今年残り ${days}日${hours}時間`;
+        };
+        updateCountdown();
+        setInterval(updateCountdown, 60 * 1000);
+    }
+
+    if (audioToggle) {
+        const audio = new Audio("assets/BGM.wav");
+        audio.loop = true;
+        audio.volume = 0.4;
+        let playing = false;
+        const updateLabel = () => {
+            audioToggle.textContent = playing ? "Sound On" : "Sound Off";
+            audioToggle.setAttribute("aria-pressed", String(playing));
+        };
+        updateLabel();
+        audioToggle.addEventListener("click", () => {
+            playing = !playing;
+            if (playing) {
+                audio.play().catch(() => {});
+            } else {
+                audio.pause();
+            }
+            updateLabel();
+        });
+    }
+
+    if (particlesCanvas) {
+        const ctx = particlesCanvas.getContext("2d");
+        const state = { w: 0, h: 0, particles: [] };
+        const resize = () => {
+            state.w = particlesCanvas.width = window.innerWidth;
+            state.h = particlesCanvas.height = window.innerHeight;
+        };
+        resize();
+        window.addEventListener("resize", resize);
+
+        const addParticle = (x, y) => {
+            state.particles.push({
+                x,
+                y,
+                r: Math.random() * 6 + 2,
+                a: 1,
+                vx: (Math.random() - 0.5) * 0.6,
+                vy: (Math.random() - 0.7) * 0.6
+            });
+        };
+
+        const step = () => {
+            ctx.clearRect(0, 0, state.w, state.h);
+            state.particles = state.particles.filter(p => p.a > 0.05);
+            state.particles.forEach(p => {
+                p.x += p.vx;
+                p.y += p.vy;
+                p.a *= 0.96;
+                ctx.fillStyle = `rgba(217,156,242,${p.a})`;
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+                ctx.fill();
+            });
+            requestAnimationFrame(step);
+        };
+        step();
+
+        const emit = event => {
+            const rect = particlesCanvas.getBoundingClientRect();
+            const x = (event.clientX || 0) - rect.left;
+            const y = (event.clientY || 0) - rect.top;
+            for (let i = 0; i < 6; i++) addParticle(x, y);
+        };
+
+        document.addEventListener("mousemove", emit);
+        document.addEventListener("touchmove", e => {
+            if (e.touches && e.touches[0]) {
+                emit(e.touches[0]);
+            }
+        }, { passive: true });
+    }
+});

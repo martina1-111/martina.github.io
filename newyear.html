@@ -23,8 +23,23 @@
                 <p class="newyear-body">本年もよろしくお願いいたします。</p>
                 <p class="newyear-sign">martina.</p>
             </div>
-            <a class="btn ghost" href="index.html">Topに戻る</a>
+            <div class="newyear-actions">
+                <div class="newyear-countdown" aria-live="polite"></div>
+                <button class="btn ghost audio-toggle" type="button" aria-pressed="false">Sound Off</button>
+                <a class="btn ghost" href="index.html">Topに戻る</a>
+            </div>
         </div>
+        <section class="newyear-wish" aria-hidden="true">
+            <div class="newyear-wish-inner">
+                <h2>どんな1年にしたい？</h2>
+                <form class="wish-form">
+                    <input type="text" name="wish" maxlength="80" placeholder="例：好きなことに素直でいられる年" required>
+                    <button class="btn primary" type="submit">投稿する</button>
+                </form>
+                <div class="wish-wall" aria-live="polite"></div>
+            </div>
+        </section>
+        <canvas class="newyear-particles" aria-hidden="true"></canvas>
     </main>
 
     <script src="script.js"></script>
