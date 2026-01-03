@@ -18,6 +18,15 @@
             </video>
         </div>
         <div class="newyear-overlay">
+            <div class="newyear-guide">
+                <p class="guide-title">Guide</p>
+                <ul>
+                    <li>音が流れます（SoundボタンでOFF/ON）</li>
+                    <li>5秒後に画面が切り替わります</li>
+                    <li>タップ/マウスで粒子が舞います</li>
+                    <li>メッセージを書くと下から流れます</li>
+                </ul>
+            </div>
             <div class="newyear-message">
                 <p class="newyear-kicker">HAPPY NEW YEAR!</p>
                 <p class="newyear-body">本年もよろしくお願いいたします。</p>
@@ -36,7 +45,10 @@
                     <input type="text" name="wish" maxlength="80" placeholder="例：好きなことに素直でいられる年" required>
                     <button class="btn primary" type="submit">投稿する</button>
                 </form>
-                <div class="wish-wall" aria-live="polite"></div>
+                <div class="wish-marquee" aria-live="polite">
+                    <div class="wish-track"></div>
+                    <div class="wish-track clone" aria-hidden="true"></div>
+                </div>
             </div>
         </section>
         <canvas class="newyear-particles" aria-hidden="true"></canvas>

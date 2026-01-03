@@ -538,7 +538,8 @@ document.addEventListener("DOMContentLoaded", () => {
 document.addEventListener("DOMContentLoaded", () => {
     const wishSection = document.querySelector(".newyear-wish");
     const wishForm = document.querySelector(".wish-form");
-    const wishWall = document.querySelector(".wish-wall");
+    const wishMarquee = document.querySelector(".wish-marquee");
+    const wishTracks = document.querySelectorAll(".wish-track");
     const countdown = document.querySelector(".newyear-countdown");
     const videoWrap = document.querySelector(".newyear-video");
     const audioToggle = document.querySelector(".audio-toggle");
@@ -554,16 +555,19 @@ document.addEventListener("DOMContentLoaded", () => {
         }, 5000);
     }
 
-    if (wishForm && wishWall) {
+    if (wishForm && wishMarquee && wishTracks.length) {
         const KEY = "newyearWishes";
         const renderWishes = () => {
             const items = JSON.parse(localStorage.getItem(KEY) || "[]");
-            wishWall.innerHTML = "";
-            items.slice(-30).reverse().forEach(text => {
-                const div = document.createElement("div");
-                div.className = "wish-item";
-                div.textContent = text;
-                wishWall.appendChild(div);
+            const recent = items.slice(-30).reverse();
+            wishTracks.forEach(track => {
+                track.innerHTML = "";
+                recent.forEach(text => {
+                    const div = document.createElement("div");
+                    div.className = "wish-item";
+                    div.textContent = text;
+                    track.appendChild(div);
+                });
             });
         };
 
@@ -598,21 +602,32 @@ document.addEventListener("DOMContentLoaded", () => {
         const audio = new Audio("assets/BGM.wav");
         audio.loop = true;
         audio.volume = 0.4;
-        let playing = false;
+        let playing = true;
         const updateLabel = () => {
             audioToggle.textContent = playing ? "Sound On" : "Sound Off";
             audioToggle.setAttribute("aria-pressed", String(playing));
         };
         updateLabel();
+        audio.play().catch(() => {
+            playing = false;
+            updateLabel();
+        });
         audioToggle.addEventListener("click", () => {
             playing = !playing;
             if (playing) {
-                audio.play().catch(() => {});
+                audio.play().catch(() => {
+                    playing = false;
+                    updateLabel();
+                });
             } else {
                 audio.pause();
             }
             updateLabel();
         });
+        document.addEventListener("click", () => {
+            if (!playing) return;
+            audio.play().catch(() => {});
+        }, { once: true });
     }
 
     if (particlesCanvas) {

@@ -532,7 +532,8 @@ body.newyear-page {
     align-items: flex-end;
     justify-content: space-between;
     padding: 28px;
-    pointer-events: none;
+    pointer-events: auto;
+    z-index: 5;
 }
 
 .newyear-message {
@@ -595,6 +596,7 @@ body.newyear-page {
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.8s ease;
+    z-index: 2;
 }
 
 .newyear-wish.show {
@@ -607,6 +609,7 @@ body.newyear-page {
     display: grid;
     gap: 16px;
     text-align: center;
+    padding-bottom: 90px;
 }
 
 .wish-form {
@@ -625,12 +628,24 @@ body.newyear-page {
     font-family: var(--font-jp);
 }
 
-.wish-wall {
+.wish-marquee {
+    position: relative;
+    height: 40vh;
+    overflow: hidden;
+    padding: 6px 10px;
+}
+
+.wish-track {
+    position: absolute;
+    left: 0;
+    right: 0;
     display: grid;
     gap: 8px;
-    max-height: 40vh;
-    overflow: auto;
-    padding: 6px 10px;
+    animation: wishScroll 18s linear infinite;
+}
+
+.wish-track.clone {
+    animation-delay: 9s;
 }
 
 .wish-item {
@@ -651,6 +666,12 @@ body.newyear-page {
     position: absolute;
     inset: 0;
     pointer-events: none;
+    z-index: 4;
+}
+
+@keyframes wishScroll {
+    0% { transform: translateY(100%); }
+    100% { transform: translateY(-100%); }
 }
 
 @keyframes nyFadeUp {
