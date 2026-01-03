@@ -543,23 +543,37 @@ document.addEventListener("DOMContentLoaded", () => {
     const videoWrap = document.querySelector(".newyear-video");
     const audioToggle = document.querySelector(".audio-toggle");
     const particlesCanvas = document.querySelector(".newyear-particles");
+    let startBubbles = null;
+
+    const showWish = () => {
+        if (!wishSection) return;
+        if (!wishSection.classList.contains("show")) {
+            wishSection.classList.add("show");
+            wishSection.setAttribute("aria-hidden", "false");
+        }
+        if (wishMarquee) wishMarquee.classList.add("is-active");
+        if (startBubbles) startBubbles();
+        const message = document.querySelector(".newyear-message");
+        if (message) message.classList.add("hidden");
+    };
 
     if (videoWrap && wishSection) {
         setTimeout(() => {
             videoWrap.classList.add("fade-out");
             setTimeout(() => {
-                const message = document.querySelector(".newyear-message");
-                if (message) message.classList.add("hidden");
-                wishSection.classList.add("show");
-                wishSection.setAttribute("aria-hidden", "false");
-                if (wishMarquee) wishMarquee.classList.add("is-active");
+                showWish();
             }, 1200);
         }, 5000);
+        setTimeout(() => {
+            if (!wishSection.classList.contains("show")) {
+                showWish();
+            }
+        }, 7000);
     }
 
     if (wishForm && wishMarquee) {
         const KEY = "newyearWishes";
-        const API_URL = "https://script.google.com/macros/s/AKfycbzWdOLCBJQ4Q6-ZdDRiK7Yjd6yJYa-s0bNjXWgNctsR_oPrODyQRWtWLUrFnyAJK44v/exec";
+        const API_URL = "https://script.google.com/macros/s/AKfycbxbhlSX2dMhqcgYSB45PcRptz48MumxfZf5sc__ujyTYbLb9M_YLCKaksxbNrFtieOe/exec";
         const getLocalWishes = () => JSON.parse(localStorage.getItem(KEY) || "[]");
         const saveLocalWishes = items => localStorage.setItem(KEY, JSON.stringify(items));
 
@@ -644,7 +658,7 @@ document.addEventListener("DOMContentLoaded", () => {
         };
 
         let bubbleTimer = null;
-        const startBubbles = () => {
+        startBubbles = () => {
             if (bubbleTimer) return;
             seedBubbles();
             bubbleTimer = setInterval(async () => {
@@ -675,18 +689,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const MAX_BUBBLES = 24;
 
         if (wishSection?.classList.contains("show")) {
-            wishMarquee.classList.add("is-active");
             startBubbles();
-        }
-        if (wishSection) {
-            const observer = new MutationObserver(() => {
-                if (wishSection.classList.contains("show")) {
-                    wishMarquee.classList.add("is-active");
-                    startBubbles();
-                    observer.disconnect();
-                }
-            });
-            observer.observe(wishSection, { attributes: true, attributeFilter: ["class"] });
         }
     }
 
