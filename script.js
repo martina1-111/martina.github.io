@@ -660,6 +660,7 @@ document.addEventListener("DOMContentLoaded", () => {
         let bubbleTimer = null;
         startBubbles = () => {
             if (bubbleTimer) return;
+            wishMarquee.classList.add("is-active");
             seedBubbles();
             bubbleTimer = setInterval(async () => {
                 const items = await fetchWishes();
@@ -689,6 +690,9 @@ document.addEventListener("DOMContentLoaded", () => {
         const MAX_BUBBLES = 24;
 
         if (wishSection?.classList.contains("show")) {
+            startBubbles();
+        }
+        if (!videoWrap) {
             startBubbles();
         }
     }
