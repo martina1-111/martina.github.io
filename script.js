@@ -593,12 +593,23 @@ document.addEventListener("DOMContentLoaded", () => {
             const bubble = document.createElement("div");
             bubble.className = "wish-bubble";
             bubble.textContent = text;
-            const left = Math.random() * 70 + 5;
-            const delay = Math.random() * 6;
-            const duration = 10 + Math.random() * 8;
+            const size = 0.85 + Math.random() * 0.5;
+            const speed = 12 + Math.random() * 10;
+            const delay = Math.random() * 2;
+            const z = Math.floor(Math.random() * 3) + 1;
+            const left = (() => {
+                let x = Math.random() * 90 + 5;
+                // avoid center 35% - 65%
+                if (x > 35 && x < 65) {
+                    x = x < 50 ? 32 : 68;
+                }
+                return x;
+            })();
             bubble.style.left = `${left}%`;
             bubble.style.animationDelay = `${delay}s`;
-            bubble.style.animationDuration = `${duration}s`;
+            bubble.style.animationDuration = `${speed}s`;
+            bubble.style.transform = `scale(${size})`;
+            bubble.style.zIndex = String(z);
             wishMarquee.appendChild(bubble);
             bubble.addEventListener("animationend", () => {
                 bubble.remove();
@@ -629,12 +640,17 @@ document.addEventListener("DOMContentLoaded", () => {
             await postWish(value);
         });
 
+        const MAX_BUBBLES = 24;
         setInterval(async () => {
             const items = await fetchWishes();
             if (!items.length) return;
             const text = items[Math.floor(Math.random() * items.length)];
             spawnBubble(text);
-        }, 2200);
+            const bubbles = wishMarquee.querySelectorAll(".wish-bubble");
+            if (bubbles.length > MAX_BUBBLES) {
+                bubbles[0].remove();
+            }
+        }, 1400);
     }
 
     if (countdown) {

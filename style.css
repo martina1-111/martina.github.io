@@ -689,7 +689,7 @@ body.newyear-page {
     font-size: 0.95rem;
     text-align: left;
     box-shadow: 0 10px 20px rgba(0,0,0,0.08);
-    animation: bubbleUp 12s linear infinite;
+    animation: bubbleUp 14s ease-out forwards, bubbleSway 4s ease-in-out infinite;
 }
 
 .wish-bubble::after {
@@ -714,8 +714,27 @@ body.newyear-page {
 
 @keyframes bubbleUp {
     0% { transform: translateY(0); opacity: 0; }
-    10% { opacity: 1; }
-    100% { transform: translateY(-120%); opacity: 0; }
+    8% { opacity: 1; }
+    20% { transform: translateY(-12%); }
+    100% { transform: translateY(-140%); opacity: 0; }
+}
+
+@keyframes bubbleSway {
+    0% { translate: -2px 0; }
+    50% { translate: 4px 0; }
+    100% { translate: -2px 0; }
+}
+
+@media (max-width: 720px) {
+    .wish-marquee {
+        height: 44vh;
+    }
+
+    .wish-bubble {
+        max-width: 82%;
+        font-size: 0.9rem;
+        padding: 8px 12px;
+    }
 }
 
 @keyframes nyFadeUp {
