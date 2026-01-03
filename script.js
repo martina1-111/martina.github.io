@@ -594,7 +594,7 @@ document.addEventListener("DOMContentLoaded", () => {
             try {
                 const res = await fetch(API_URL, {
                     method: "POST",
-                    headers: { "Content-Type": "application/json" },
+                    headers: { "Content-Type": "text/plain;charset=utf-8" },
                     body: JSON.stringify({ message })
                 });
                 const data = await res.json();
