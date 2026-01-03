@@ -558,7 +558,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (wishForm && wishMarquee) {
         const KEY = "newyearWishes";
-        const API_URL = "https://script.google.com/macros/s/AKfycbyfhl0uady-JAKXrci8KmzyJZc672hkfJMAJ4SozPIp3T0ksc6GuMw0Uz038G0HVz6YTQ/exec";
+        const API_URL = "https://script.google.com/macros/s/AKfycbzWdOLCBJQ4Q6-ZdDRiK7Yjd6yJYa-s0bNjXWgNctsR_oPrODyQRWtWLUrFnyAJK44v/exec";
         const getLocalWishes = () => JSON.parse(localStorage.getItem(KEY) || "[]");
         const saveLocalWishes = items => localStorage.setItem(KEY, JSON.stringify(items));
 
