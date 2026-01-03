@@ -523,13 +523,17 @@ body.nav-open {
 html.newyear-page,
 body.newyear-page {
     height: 100%;
+    min-height: 100dvh;
+    width: 100%;
     overflow: hidden;
     background: #000;
 }
 
 .newyear-screen {
     height: 100vh;
+    height: 100dvh;
     width: 100vw;
+    width: 100dvw;
     min-height: 100%;
     min-width: 100%;
     position: relative;
@@ -629,13 +633,14 @@ body.newyear-page {
     inset: 0;
     display: grid;
     place-items: center;
+    min-height: 100dvh;
     background: linear-gradient(rgba(249,248,246,0.4), rgba(249,248,246,0.4)),
         url("assets/newyear.png") center / cover no-repeat;
     background-size: cover;
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.8s ease;
-    z-index: 2;
+    z-index: 6;
 }
 
 .newyear-wish.show {
@@ -649,6 +654,9 @@ body.newyear-page {
     gap: 16px;
     text-align: center;
     padding-bottom: 90px;
+    position: relative;
+    z-index: 7;
+    pointer-events: auto;
 }
 
 .wish-form {
@@ -656,6 +664,9 @@ body.newyear-page {
     gap: 10px;
     justify-content: center;
     flex-wrap: wrap;
+    position: relative;
+    z-index: 8;
+    pointer-events: auto;
 }
 
 .wish-form input {
@@ -671,9 +682,13 @@ body.newyear-page {
     position: fixed;
     inset: 0;
     height: 100vh;
+    height: 100dvh;
     width: 100vw;
+    width: 100dvw;
     overflow: hidden;
     padding: 12px 16px;
+    z-index: 3;
+    pointer-events: none;
 }
 
 .newyear-video.fade-out {
@@ -720,7 +735,7 @@ body.newyear-page {
     0% { transform: translateY(0); opacity: 0; }
     8% { opacity: 1; }
     20% { transform: translateY(-12%); }
-    100% { transform: translateY(-140%); opacity: 0; }
+    100% { transform: translateY(-200%); opacity: 0; }
 }
 
 @keyframes bubbleSway {

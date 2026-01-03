@@ -545,11 +545,11 @@ document.addEventListener("DOMContentLoaded", () => {
     const particlesCanvas = document.querySelector(".newyear-particles");
 
     if (videoWrap && wishSection) {
+        wishSection.classList.add("show");
+        wishSection.setAttribute("aria-hidden", "false");
         setTimeout(() => {
             videoWrap.classList.add("fade-out");
             setTimeout(() => {
-                wishSection.classList.add("show");
-                wishSection.setAttribute("aria-hidden", "false");
                 const message = document.querySelector(".newyear-message");
                 if (message) message.classList.add("hidden");
             }, 1200);
@@ -589,13 +589,13 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         };
 
-        const spawnBubble = text => {
+        const spawnBubble = (text, options = {}) => {
             const bubble = document.createElement("div");
             bubble.className = "wish-bubble";
             bubble.textContent = text;
             const size = 0.85 + Math.random() * 0.5;
             const speed = 12 + Math.random() * 10;
-            const delay = Math.random() * 2;
+            const delay = options.initial ? -Math.random() * speed : Math.random() * 2;
             const z = Math.floor(Math.random() * 3) + 1;
             const left = (() => {
                 let x = Math.random() * 90 + 5;
@@ -619,11 +619,13 @@ document.addEventListener("DOMContentLoaded", () => {
         const seedBubbles = async () => {
             wishMarquee.innerHTML = "";
             const items = await fetchWishes();
-            if (!items.length) {
-                ["健康に過ごしたい", "新しいことに挑戦", "笑顔の多い一年"].forEach(spawnBubble);
-                return;
+            const base = items.length
+                ? items
+                : ["健康に過ごしたい", "新しいことに挑戦", "笑顔の多い一年"];
+            const initialCount = 18;
+            for (let i = 0; i < initialCount; i += 1) {
+                spawnBubble(base[i % base.length], { initial: true });
             }
-            items.slice(-12).forEach(spawnBubble);
         };
 
         seedBubbles();
