@@ -539,7 +539,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const wishSection = document.querySelector(".newyear-wish");
     const wishForm = document.querySelector(".wish-form");
     const wishMarquee = document.querySelector(".wish-marquee");
-    const wishTracks = document.querySelectorAll(".wish-track");
     const countdown = document.querySelector(".newyear-countdown");
     const videoWrap = document.querySelector(".newyear-video");
     const audioToggle = document.querySelector(".audio-toggle");
@@ -555,34 +554,54 @@ document.addEventListener("DOMContentLoaded", () => {
         }, 5000);
     }
 
-    if (wishForm && wishMarquee && wishTracks.length) {
+    if (wishForm && wishMarquee) {
         const KEY = "newyearWishes";
-        const renderWishes = () => {
-            const items = JSON.parse(localStorage.getItem(KEY) || "[]");
-            const recent = items.slice(-30).reverse();
-            wishTracks.forEach(track => {
-                track.innerHTML = "";
-                recent.forEach(text => {
-                    const div = document.createElement("div");
-                    div.className = "wish-item";
-                    div.textContent = text;
-                    track.appendChild(div);
-                });
+        const getWishes = () => JSON.parse(localStorage.getItem(KEY) || "[]");
+        const spawnBubble = text => {
+            const bubble = document.createElement("div");
+            bubble.className = "wish-bubble";
+            bubble.textContent = text;
+            const left = Math.random() * 70 + 5;
+            const delay = Math.random() * 6;
+            const duration = 10 + Math.random() * 8;
+            bubble.style.left = `${left}%`;
+            bubble.style.animationDelay = `${delay}s`;
+            bubble.style.animationDuration = `${duration}s`;
+            wishMarquee.appendChild(bubble);
+            bubble.addEventListener("animationend", () => {
+                bubble.remove();
             });
         };
 
-        renderWishes();
+        const seedBubbles = () => {
+            wishMarquee.innerHTML = "";
+            const items = getWishes();
+            if (!items.length) {
+                ["健康に過ごしたい", "新しいことに挑戦", "笑顔の多い一年"].forEach(spawnBubble);
+                return;
+            }
+            items.slice(-12).forEach(spawnBubble);
+        };
+
+        seedBubbles();
         wishForm.addEventListener("submit", event => {
             event.preventDefault();
             const input = wishForm.querySelector("input[name='wish']");
             const value = (input.value || "").trim();
             if (!value) return;
-            const items = JSON.parse(localStorage.getItem(KEY) || "[]");
+            const items = getWishes();
             items.push(value);
             localStorage.setItem(KEY, JSON.stringify(items));
             input.value = "";
-            renderWishes();
+            spawnBubble(value);
         });
+
+        setInterval(() => {
+            const items = getWishes();
+            if (!items.length) return;
+            const text = items[Math.floor(Math.random() * items.length)];
+            spawnBubble(text);
+        }, 1800);
     }
 
     if (countdown) {
@@ -624,10 +643,12 @@ document.addEventListener("DOMContentLoaded", () => {
             }
             updateLabel();
         });
-        document.addEventListener("click", () => {
+        const resumeAudio = () => {
             if (!playing) return;
             audio.play().catch(() => {});
-        }, { once: true });
+        };
+        document.addEventListener("click", resumeAudio, { once: true });
+        document.addEventListener("touchstart", resumeAudio, { once: true });
     }
 
     if (particlesCanvas) {
