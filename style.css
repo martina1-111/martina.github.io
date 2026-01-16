@@ -1422,6 +1422,34 @@ body.newyear-page {
     color: var(--text-sub);
 }
 
+.others-page .section {
+    padding: 64px 0;
+}
+
+.others-page .section-head {
+    margin-bottom: 20px;
+}
+
+.others-page .gallery-grid {
+    gap: 12px;
+}
+
+.others-page .gallery-card figcaption {
+    padding: 10px 12px 12px;
+}
+
+.others-page .list-card {
+    gap: 6px;
+}
+
+.others-page .list-card ul {
+    gap: 4px;
+}
+
+.others-page .list-card li {
+    line-height: 1.45;
+}
+
 .video-card {
     background: var(--panel);
     border: 1.5px solid var(--border);
