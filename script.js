@@ -68,6 +68,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const iframeSrc = id =>
         `https://www.youtube.com/embed/${id}?rel=0&autoplay=1&mute=1&playsinline=1&loop=1&playlist=${id}&controls=0&modestbranding=1&fs=0&showinfo=0&iv_load_policy=3`;
+    const youtubeUrl = id => (id ? `https://www.youtube.com/watch?v=${id}` : "");
 
     const buildCarousel = (carousel, videos) => {
         if (!carousel || !videos.length) return;
@@ -287,55 +288,21 @@ document.addEventListener("DOMContentLoaded", () => {
             card.appendChild(embed);
             card.appendChild(meta);
             container.appendChild(card);
+
+            const link = item.link || youtubeUrl(item.id);
+            if (link) {
+                card.dataset.link = link;
+                card.style.cursor = "pointer";
+            }
         });
     };
 
     const bindModal = () => {
-        const modal = document.createElement("div");
-        modal.className = "comment-modal hidden";
-        modal.innerHTML = `
-            <div class="comment-backdrop"></div>
-            <div class="comment-dialog">
-                <button class="comment-close" aria-label="閉じる">×</button>
-                <p class="comment-title">作品メモ</p>
-                <div class="comment-fields">
-                    <p><strong>タイトル：</strong><span class="comment-title-text"></span></p>
-                    <p><strong>ジャンル：</strong><span class="comment-genre"></span></p>
-                    <p><strong>制作時期：</strong><span class="comment-date"></span></p>
-                    <p><strong>担当：</strong><span class="comment-role"></span></p>
-                </div>
-                <div class="comment-actions">
-                    <button class="btn ghost small comment-cancel">閉じる</button>
-                </div>
-            </div>
-        `;
-        document.body.appendChild(modal);
-
-        const showModal = info => {
-            modal.classList.remove("hidden");
-            modal.querySelector(".comment-title-text").textContent = info.title || "この動画";
-            modal.querySelector(".comment-genre").textContent = info.genre || "SNS";
-            modal.querySelector(".comment-date").textContent = info.date || "YouTube公開日ベース";
-            modal.querySelector(".comment-role").textContent = info.role || "3DCGモデリング";
-        };
-        const hideModal = () => modal.classList.add("hidden");
-
-        modal.querySelector(".comment-backdrop").addEventListener("click", hideModal);
-        modal.querySelector(".comment-close").addEventListener("click", hideModal);
-        modal.querySelector(".comment-cancel").addEventListener("click", hideModal);
-
-        document.body.addEventListener("click", event => {
-            const embed = event.target.closest(".video-embed");
-            if (!embed) return;
-            event.preventDefault();
-            const card = embed.closest(".video-card");
-            const title = card.querySelector("h3")?.textContent || "この動画";
-            const lines = card.querySelectorAll(".meta-line");
-            showModal({
-                title,
-                genre: lines[0]?.textContent?.replace("ジャンル: ", "") || "SNS",
-                date: lines[1]?.textContent?.replace("制作時期: ", "") || "YouTube公開日ベース",
-                role: lines[2]?.textContent?.replace("担当: ", "") || "3DCGモデリング"
+        document.querySelectorAll(".video-card[data-link]").forEach(card => {
+            const url = card.dataset.link;
+            if (!url) return;
+            card.addEventListener("click", () => {
+                window.open(url, "_blank", "noopener");
             });
         });
     };
