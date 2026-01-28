@@ -372,6 +372,19 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     };
 
+    const bindCarouselLinks = () => {
+        document.querySelectorAll(".video-carousel[data-link]").forEach(carousel => {
+            const url = carousel.dataset.link;
+            if (!url) return;
+            carousel.style.cursor = "pointer";
+            carousel.addEventListener("click", event => {
+                const blocked = event.target.closest(".carousel-controls, .carousel-dots, .carousel-arrow, button, a");
+                if (blocked) return;
+                window.location.href = url;
+            });
+        });
+    };
+
     const initAnchors = () => {
         document.querySelectorAll('a[href^="#"]').forEach(link => {
             link.addEventListener("click", event => {
@@ -436,6 +449,7 @@ document.addEventListener("DOMContentLoaded", () => {
         bindModal();
         bindContactForm();
         bindGalleryLinks();
+        bindCarouselLinks();
         bindMenuToggle();
         initAnchors();
         initCurrentMonth();
