@@ -1074,6 +1074,7 @@ body.newyear-page {
     gap: 12px;
     position: relative;
     min-height: 240px;
+    overflow: hidden;
 }
 
 .carousel-window {
@@ -1141,6 +1142,29 @@ body.newyear-page {
     display: flex;
     gap: 8px;
     justify-content: center;
+}
+
+@media (max-width: 720px) {
+    body {
+        overflow-x: hidden;
+    }
+
+    .carousel-controls {
+        gap: 8px;
+        flex-wrap: wrap;
+        padding: 0 8px;
+    }
+
+    .carousel-dots {
+        max-width: 70vw;
+        flex-wrap: wrap;
+    }
+
+    .carousel-arrow {
+        width: 32px;
+        height: 32px;
+        font-size: 1rem;
+    }
 }
 
 .carousel-dot {
