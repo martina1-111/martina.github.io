@@ -261,7 +261,11 @@ document.addEventListener("DOMContentLoaded", () => {
     ];
 
     const renderList = (container, category, videoData) => {
-        const list = videoData.filter(v => v.category === category);
+        let list = videoData.filter(v => v.category === category);
+        if (window.matchMedia("(max-width: 720px)").matches) {
+            const half = Math.ceil(list.length / 2);
+            list = list.slice(0, half);
+        }
         container.innerHTML = "";
         list.forEach(item => {
             const card = document.createElement("div");
