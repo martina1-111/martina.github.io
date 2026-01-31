@@ -73,6 +73,16 @@ document.addEventListener("DOMContentLoaded", () => {
     const buildCarousel = (carousel, videos) => {
         if (!carousel || !videos.length) return;
 
+        const limit = Number(carousel.dataset.limit || 0);
+        const limitMobile = Number(carousel.dataset.limitMobile || 0);
+        const isMobile = window.matchMedia("(max-width: 720px)").matches;
+        let list = videos;
+        if (isMobile && limitMobile) {
+            list = videos.slice(0, limitMobile);
+        } else if (!isMobile && limit) {
+            list = videos.slice(0, limit);
+        }
+
         const track = document.createElement("div");
         track.className = "carousel-track";
         const dots = document.createElement("div");
@@ -103,7 +113,7 @@ document.addEventListener("DOMContentLoaded", () => {
         controls.appendChild(dots);
         controls.appendChild(nextBtn);
 
-        videos.forEach((video, idx) => {
+        list.forEach((video, idx) => {
             const slide = document.createElement("div");
             slide.className = "carousel-slide";
             const embed = document.createElement("div");
@@ -129,7 +139,7 @@ document.addEventListener("DOMContentLoaded", () => {
             dots.appendChild(dot);
         });
 
-        const total = videos.length;
+        const total = list.length;
         let index = 0;
         let timer;
 
@@ -262,10 +272,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const renderList = (container, category, videoData) => {
         let list = videoData.filter(v => v.category === category);
-        if (window.matchMedia("(max-width: 720px)").matches) {
-            const half = Math.ceil(list.length / 2);
-            list = list.slice(0, half);
-        }
         container.innerHTML = "";
         list.forEach(item => {
             const card = document.createElement("div");
